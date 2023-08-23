@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentForm
 {
-    internal class DataAccessLayer
+    internal class DataLayer
     {
 
         StudentModel studentModel;

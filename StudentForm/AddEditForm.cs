@@ -26,9 +26,9 @@ namespace StudentForm
         public string StudentHeaderText;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DataAccessLayer dataAccessLayer = new DataAccessLayer();
+            DataLayer dataLayer = new DataLayer();
             StudentModel studentModel = new StudentModel();
-            dataAccessLayer.setStudentModel(studentModel);
+            dataLayer.setStudentModel(studentModel);
 
             studentModel.FirstName = txtFirstName.Text.Trim();
             studentModel.LastName = txtLastName.Text.Trim();
@@ -46,18 +46,18 @@ namespace StudentForm
             bool Validated = validator.ValidateFields();
             if (Validated == false)
             {
-                lblFirstNameValidator.Text = validator.FirstNameValidatorText;
-                lblLastNameValidator.Text = validator.LastNameValidatorText;
-                lblGenderValidator.Text = validator.GenderValidatorText;
-                lblDateOfBirthValidator.Text = validator.DateOfBirthValidatorText;
-                lblAgeValidator.Text = validator.AgeValidatorText;
+                lblFirstNameValidator.Text = validator.errFirstName;
+                lblLastNameValidator.Text = validator.errLastName;
+                lblGenderValidator.Text = validator.errGender;
+                lblDateOfBirthValidator.Text = validator.errDateOfBirth;
+                lblAgeValidator.Text = validator.errAge;
             }
             string action = studentDetailForm.action;
             if (action == "Add")
             {
                 if (Validated)
                 {
-                    dataAccessLayer.AddData();
+                    dataLayer.AddData();
                     Close();
                 }
             }
@@ -66,7 +66,7 @@ namespace StudentForm
                 if (Validated)
                 {
                     int index = studentDetailForm.rowIndex;
-                    dataAccessLayer.UpdateData(index);
+                    dataLayer.UpdateData(index);
                     Close();
                 }
             }
@@ -75,7 +75,7 @@ namespace StudentForm
         public void LoadData()
         {
             int index = studentDetailForm.rowIndex;
-            string[] DataToEdit = DataAccessLayer.studentList[index];
+            string[] DataToEdit = DataLayer.studentList[index];
             txtFirstName.Text = DataToEdit[1];
             txtLastName.Text = DataToEdit[2];
             txtClass.Text = DataToEdit[5];
@@ -96,8 +96,8 @@ namespace StudentForm
             var confirmResult = MessageBox.Show("Are you sure you want to delete this student record?", "Confirm Delete!!", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                DataAccessLayer deleteData = new DataAccessLayer();
-                deleteData.DeleteData(index);
+                DataLayer dataLayer = new DataLayer();
+                dataLayer.DeleteData(index);
                 Close();
             }
         }
@@ -160,8 +160,8 @@ namespace StudentForm
             lblStudentHeader.Text = StudentHeaderText;
             btnDelete.Visible = true;
             txtAge.MaxLength = 2;
-            txtFirstName.MaxLength = 73;
-            txtLastName.MaxLength = 73;
+            txtFirstName.MaxLength = 47;
+            txtLastName.MaxLength = 47;
             txtClass.MaxLength = 47;
             textAreaAddress.MaxLength = 300;
 

@@ -30,67 +30,67 @@ namespace StudentForm
 
             if (string.IsNullOrEmpty(firstName))
             {
-                FirstNameValidatorText = requiredMessage;
+                errFirstName = requiredMessage;
                 isValid = false;
             }
             else if (firstName.Length > 15 || firstName.Length < 3)
             {
-                FirstNameValidatorText = "The First Name field should have min 3 characters and max 15 characters";
+                errFirstName = "The First Name field should have min 3 characters and max 15 characters";
                 isValid = false;
             }
             else
             {
-                FirstNameValidatorText = "";
+                errFirstName = "";
             }
 
             if (string.IsNullOrEmpty(lastName))
             {
-                LastNameValidatorText = requiredMessage;
+                errLastName = requiredMessage;
                 isValid = false;
             }
             else if (lastName.Length > 18 || lastName.Length < 2)
             {
-                LastNameValidatorText = "The last Name field should have min 2 characters and max 18 characters";
+                errLastName = "The last Name field should have min 2 characters and max 18 characters";
                 isValid = false;
             }
             else
             {
-                LastNameValidatorText = "";
+                errLastName = "";
             }
 
             if (gender == -1)
             {
-                GenderValidatorText = requiredMessage;
+                errGender = requiredMessage;
                 isValid = false;
             }
             else
             {
-                GenderValidatorText = "";
+                errGender = "";
             }
 
             if (dateOfBirth == DateTime.Now.Date)
             {
-                DateOfBirthValidatorText = requiredMessage;
+                errDateOfBirth = requiredMessage;
                 isValid = false;
             }
             else
             {
-                DateOfBirthValidatorText = "";
+                errDateOfBirth = "";
             }
 
             if (age==0)
             {
-                AgeValidatorText = requiredMessage;
+                errAge = requiredMessage;
                 isValid = false;
             }
             else if (age > 99 || age < 5)
             {
-                AgeValidatorText = "Age value should be\nbetween 5 and 99";
+                errAge = "Age value should be\nbetween 5 and 99";
                 isValid = false;
             }
             else
             {
-                AgeValidatorText = "";
+                errAge = "";
             }
 
             return isValid;
@@ -117,10 +117,10 @@ namespace StudentForm
             }
         }
 
-        public string FirstNameValidatorText { get; set; }
-        public string LastNameValidatorText { get; set; }
-        public string GenderValidatorText { get; set; }
-        public string DateOfBirthValidatorText { get; set; }
-        public string AgeValidatorText { get; set; }
+        public string errFirstName { get; set; }
+        public string errLastName { get; set; }
+        public string errGender { get; set; }
+        public string errDateOfBirth{ get; set; }
+        public string errAge { get; set; }
     }
 }

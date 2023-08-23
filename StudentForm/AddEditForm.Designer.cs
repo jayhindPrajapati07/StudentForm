@@ -71,7 +71,7 @@
             panel.Dock = DockStyle.Fill;
             panel.Location = new Point(0, 0);
             panel.Name = "panel";
-            panel.Size = new Size(852, 834);
+            panel.Size = new Size(855, 834);
             panel.TabIndex = 0;
             // 
             // PanelContainer
@@ -422,7 +422,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(852, 834);
+            ClientSize = new Size(855, 834);
             Controls.Add(panel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;

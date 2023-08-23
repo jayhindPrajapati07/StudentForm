@@ -13,7 +13,7 @@ namespace StudentForm
         private void RefreshDataGridView()
         {
             dataGridView.Rows.Clear();
-            foreach (var studentData in DataAccessLayer.studentList)
+            foreach (var studentData in DataLayer.studentList)
             {
                 //dataGridView.Rows.Add(studentData);
                 string[] stdData = new string[6];
@@ -47,9 +47,9 @@ namespace StudentForm
                 AddEditForm addEditForm = new AddEditForm();
                 addEditForm.setMain(this);
                 id = dataGridView.Rows[rowIndex].Cells[0].Value.ToString();
-                for (int i = 0; i < DataAccessLayer.studentList.Count; i++)
+                for (int i = 0; i < DataLayer.studentList.Count; i++)
                 {
-                    if (DataAccessLayer.studentList[i][0] == id) rowIndex = i;
+                    if (DataLayer.studentList[i][0] == id) rowIndex = i;
                 }
                 action = "Edit";
                 addEditForm.StudentHeaderText = "Edit Students";
@@ -118,8 +118,8 @@ namespace StudentForm
             dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
             dataGridView.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 13);
 
-            DataAccessLayer dataAccessLayer = new DataAccessLayer();
-            dataAccessLayer.defaultStudents();
+            DataLayer dataLayer = new DataLayer();
+            dataLayer.defaultStudents();
             RefreshDataGridView();
             dataGridView.Rows[0].Selected = true;
             txtSearch.MaxLength = 30;
