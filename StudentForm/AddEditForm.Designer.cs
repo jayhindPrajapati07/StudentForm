@@ -43,10 +43,10 @@
             textAreaAddress = new TextBox();
             txtClass = new TextBox();
             txtAge = new TextBox();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            star2 = new Label();
+            star3 = new Label();
+            star4 = new Label();
+            star5 = new Label();
             Star1 = new Label();
             btnCancel = new Button();
             btnDelete = new Button();
@@ -89,10 +89,10 @@
             PanelContainer.Controls.Add(textAreaAddress);
             PanelContainer.Controls.Add(txtClass);
             PanelContainer.Controls.Add(txtAge);
-            PanelContainer.Controls.Add(label4);
-            PanelContainer.Controls.Add(label3);
-            PanelContainer.Controls.Add(label2);
-            PanelContainer.Controls.Add(label1);
+            PanelContainer.Controls.Add(star2);
+            PanelContainer.Controls.Add(star3);
+            PanelContainer.Controls.Add(star4);
+            PanelContainer.Controls.Add(star5);
             PanelContainer.Controls.Add(Star1);
             PanelContainer.Controls.Add(btnCancel);
             PanelContainer.Controls.Add(btnDelete);
@@ -243,49 +243,49 @@
             txtAge.KeyPress += txtAge_KeyPress;
             txtAge.KeyUp += txtAge_KeyUp;
             // 
-            // label4
+            // star2
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(135, 100);
-            label4.Name = "label4";
-            label4.Size = new Size(25, 32);
-            label4.TabIndex = 14;
-            label4.Text = "*";
+            star2.AutoSize = true;
+            star2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            star2.ForeColor = Color.Red;
+            star2.Location = new Point(135, 100);
+            star2.Name = "star2";
+            star2.Size = new Size(25, 32);
+            star2.TabIndex = 14;
+            star2.Text = "*";
             // 
-            // label3
+            // star3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(98, 181);
-            label3.Name = "label3";
-            label3.Size = new Size(25, 32);
-            label3.TabIndex = 13;
-            label3.Text = "*";
+            star3.AutoSize = true;
+            star3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            star3.ForeColor = Color.Red;
+            star3.Location = new Point(98, 181);
+            star3.Name = "star3";
+            star3.Size = new Size(25, 32);
+            star3.TabIndex = 13;
+            star3.Text = "*";
             // 
-            // label2
+            // star4
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.Red;
-            label2.Location = new Point(162, 268);
-            label2.Name = "label2";
-            label2.Size = new Size(25, 32);
-            label2.TabIndex = 12;
-            label2.Text = "*";
+            star4.AutoSize = true;
+            star4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            star4.ForeColor = Color.Red;
+            star4.Location = new Point(162, 268);
+            star4.Name = "star4";
+            star4.Size = new Size(25, 32);
+            star4.TabIndex = 12;
+            star4.Text = "*";
             // 
-            // label1
+            // star5
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Red;
-            label1.Location = new Point(559, 268);
-            label1.Name = "label1";
-            label1.Size = new Size(25, 32);
-            label1.TabIndex = 11;
-            label1.Text = "*";
+            star5.AutoSize = true;
+            star5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            star5.ForeColor = Color.Red;
+            star5.Location = new Point(559, 268);
+            star5.Name = "star5";
+            star5.Size = new Size(25, 32);
+            star5.TabIndex = 11;
+            star5.Text = "*";
             // 
             // Star1
             // 
@@ -454,10 +454,10 @@
         private Button btnDelete;
         private Button btnSave;
         private Label Star1;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
+        private Label star2;
+        private Label star3;
+        private Label star4;
+        private Label star5;
         private TextBox txtLastName;
         private TextBox textAreaAddress;
         private TextBox txtClass;

@@ -99,7 +99,6 @@ namespace StudentForm
         //Calculate Age from DateOfBirth
         public void ageCalc(DateTime dob, out int age)
         {
-            DateTime dateofBirth = dob;
             age = (DateTime.Now.Date.Year - dob.Date.Year);
         }
 

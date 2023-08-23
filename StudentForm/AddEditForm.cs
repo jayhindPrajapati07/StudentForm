@@ -17,8 +17,8 @@ namespace StudentForm
         {
             InitializeComponent();
         }
-        StudentDetailForm studentDetailForm;
 
+        StudentDetailForm studentDetailForm;
         public void setMain(StudentDetailForm studentDetailForm)
         {
             this.studentDetailForm = studentDetailForm;
