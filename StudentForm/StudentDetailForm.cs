@@ -27,11 +27,12 @@ namespace StudentForm
 
         public int rowIndex;
         public bool deleteVisible = false;
+        public string action;
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddEditForm addEditForm = new AddEditForm();
             addEditForm.setMain(this);
-
+            action = "Add";
             addEditForm.StudentHeaderText = "Add Students";
             addEditForm.ShowDialog();
             RefreshDataGridView();
@@ -50,6 +51,7 @@ namespace StudentForm
                 {
                     if (DataAccessLayer.studentList[i][0] == id) rowIndex = i;
                 }
+                action = "Edit";
                 addEditForm.StudentHeaderText = "Edit Students";
                 addEditForm.LoadData();
                 deleteVisible = true;

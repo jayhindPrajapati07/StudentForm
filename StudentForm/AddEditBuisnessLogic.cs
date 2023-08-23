@@ -25,7 +25,7 @@ namespace StudentForm
             string firstName = studentModel.FirstName;
             string lastName = studentModel.LastName;
             int gender = studentModel.GenderIndex;
-            string dateOfBirth= studentModel.DateOfBirth;
+            DateTime dateOfBirth = studentModel.DateOfBirth;
             int age = studentModel.Age;
 
             if (string.IsNullOrEmpty(firstName))
@@ -68,7 +68,7 @@ namespace StudentForm
                 GenderValidatorText = "";
             }
 
-            if (dateOfBirth == DateTime.Now.Date.ToString())
+            if (dateOfBirth == DateTime.Now.Date)
             {
                 DateOfBirthValidatorText = requiredMessage;
                 isValid = false;
@@ -85,7 +85,7 @@ namespace StudentForm
             }
             else if (age > 99 || age < 5)
             {
-                AgeValidatorText = "Age value should be\n between 5 and 99";
+                AgeValidatorText = "Age value should be\nbetween 5 and 99";
                 isValid = false;
             }
             else

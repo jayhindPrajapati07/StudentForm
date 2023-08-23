@@ -34,11 +34,10 @@ namespace StudentForm
             studentModel.LastName = txtLastName.Text.Trim();
             studentModel.GenderIndex = cmbGender.SelectedIndex;
             studentModel.Gender = cmbGender.Text;
-            studentModel.DateOfBirth = dtDateOfBirth.Text;
+            studentModel.DateOfBirth = dtDateOfBirth.Value;
             if (txtAge.Text.Trim() == "") { studentModel.Age = 0; } else { studentModel.Age = int.Parse(txtAge.Text); }
             studentModel.Class = txtClass.Text.Trim();
             studentModel.Address = textAreaAddress.Text.Trim();
-            studentModel.DateOfBirth = dtDateOfBirth.Text;
 
             AddEditBuisnessLogic validator = new AddEditBuisnessLogic();
             //validator.setdataAccessLayer(dataAccessLayer);
@@ -53,8 +52,8 @@ namespace StudentForm
                 lblDateOfBirthValidator.Text = validator.DateOfBirthValidatorText;
                 lblAgeValidator.Text = validator.AgeValidatorText;
             }
-
-            if (StudentHeaderText == "Add Students")
+            string action = studentDetailForm.action;
+            if (action == "Add")
             {
                 if (Validated)
                 {
@@ -79,12 +78,11 @@ namespace StudentForm
             string[] DataToEdit = DataAccessLayer.studentList[index];
             txtFirstName.Text = DataToEdit[1];
             txtLastName.Text = DataToEdit[2];
-            cmbGender.Text = DataToEdit[3];
-            string age = DataToEdit[4];
-            txtAge.Text = age.Substring(0, 2).Trim();
             txtClass.Text = DataToEdit[5];
             textAreaAddress.Text = DataToEdit[6];
             dtDateOfBirth.Text = DataToEdit[7];
+            int genderIndex = int.Parse(DataToEdit[8]);
+            cmbGender.Text = cmbGender.Items[genderIndex].ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -127,8 +125,6 @@ namespace StudentForm
             dobCalculator.dobCalc(txtAge.Text, out date);
             dtDateOfBirth.Value = date;
         }
-
-
 
         private void HandleKeyPress(object sender, KeyPressEventArgs e)
         {
@@ -195,7 +191,6 @@ namespace StudentForm
             cmbGender.ForeColor = Color.Black;
             cmbGender.DroppedDown = true;
         }
-
         private void cmbGender_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)

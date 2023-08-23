@@ -21,8 +21,8 @@ namespace StudentForm
         public static List<string[]> studentList = new List<string[]>();
         public void defaultStudents()
         {
-            string[] student1 = {"0", "Jayhind", "Prajapati", "Male", "21 years", "Graduate", "Mumbai", "1/1/2002" };
-            string[] student2 = {"1", "Dheeraj", "Gupta", "Male", "21 years", "Graduate", "Mumbai", "1/1/2002" };
+            string[] student1 = {"0", "Jayhind", "Prajapati", "Male", "21 years", "Graduate", "Mumbai", "1/1/2002" ,"0"};
+            string[] student2 = {"1", "Dheeraj", "Gupta", "Male", "21 years", "Graduate", "Mumbai", "1/1/2002" ,"0"};
             studentList.Add(student1);
             studentList.Add(student2);
         }
@@ -30,12 +30,12 @@ namespace StudentForm
         public void AddData()
         {
             int StudentId = int.Parse(studentList[studentList.Count - 1][0])+1;
-            string[] studentData = {StudentId.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age +years, studentModel.Class, studentModel.Address , studentModel.DateOfBirth };
+            string[] studentData = {StudentId.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age +years, studentModel.Class, studentModel.Address , studentModel.DateOfBirth.ToString() ,studentModel.GenderIndex.ToString()};
             studentList.Add(studentData);
         }
         public void UpdateData(int index)
         {
-            string[] studentData = {index.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age + years, studentModel.Class, studentModel.Address, studentModel.DateOfBirth };
+            string[] studentData = {index.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age + years, studentModel.Class, studentModel.Address, studentModel.DateOfBirth.ToString() ,studentModel.GenderIndex.ToString()};
             studentList.RemoveAt(index);
             studentList.Insert(index, studentData);
         }
