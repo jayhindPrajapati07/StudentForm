@@ -8,10 +8,16 @@ namespace StudentForm
 {
     internal class AddEditBuisnessLogic 
     {
-        DataLogic dataLogic;
-        public void setDataLogic(DataLogic dataLogic)
+        DataAccessLayer dataAccessLayer;
+        public void setdataAccessLayer(DataAccessLayer dataAccessLayer)
         {
-            this.dataLogic = dataLogic;
+            this.dataAccessLayer = dataAccessLayer;
+        }
+
+        StudentModel studentModel;
+        public void setStudentModel(StudentModel studentModel)
+        {
+            this.studentModel = studentModel;
         }
 
         string requiredMessage = "This field is required";
@@ -19,75 +25,76 @@ namespace StudentForm
         public bool ValidateFields()
         {
             bool isValid = true;
-            string firstName = dataLogic.FirstName;
-            string lastName = dataLogic.LastName;
-            int gender = dataLogic.GenderIndex;
-            string dateOfBirth=dataLogic.DateOfBirth;
-            string age = dataLogic.Age;
+
+            string firstName = studentModel.FirstName;
+            string lastName = studentModel.LastName;
+            int gender = studentModel.GenderIndex;
+            string dateOfBirth= studentModel.DateOfBirth;
+            int age = studentModel.Age;
 
             if (string.IsNullOrEmpty(firstName))
             {
-                dataLogic.FirstNameValidatorText = requiredMessage;
+                dataAccessLayer.FirstNameValidatorText = requiredMessage;
                 isValid = false;
             }
             else if (firstName.Length > 15 || firstName.Length < 3)
             {
-                dataLogic.FirstNameValidatorText = "The First Name field should have min 3 characters and max 15 characters";
+                dataAccessLayer.FirstNameValidatorText = "The First Name field should have min 3 characters and max 15 characters";
                 isValid = false;
             }
             else
             {
-                dataLogic.FirstNameValidatorText = "";
+                dataAccessLayer.FirstNameValidatorText = "";
             }
 
             if (string.IsNullOrEmpty(lastName))
             {
-                dataLogic.LastNameValidatorText = requiredMessage;
+                dataAccessLayer.LastNameValidatorText = requiredMessage;
                 isValid = false;
             }
             else if (lastName.Length > 18 || lastName.Length < 2)
             {
-                dataLogic.LastNameValidatorText = "The last Name field should have min 2 characters and max 18 characters";
+                dataAccessLayer.LastNameValidatorText = "The last Name field should have min 2 characters and max 18 characters";
                 isValid = false;
             }
             else
             {
-                dataLogic.LastNameValidatorText = "";
+                dataAccessLayer.LastNameValidatorText = "";
             }
 
             if (gender == -1)
             {
-                dataLogic.GenderValidatorText = requiredMessage;
+                dataAccessLayer.GenderValidatorText = requiredMessage;
                 isValid = false;
             }
             else
             {
-                dataLogic.GenderValidatorText = "";
+                dataAccessLayer.GenderValidatorText = "";
             }
 
             if (dateOfBirth == DateTime.Now.Date.ToString())
             {
-                dataLogic.DateOfBirthValidatorText = requiredMessage;
+                dataAccessLayer.DateOfBirthValidatorText = requiredMessage;
                 isValid = false;
             }
             else
             {
-                dataLogic.DateOfBirthValidatorText = "";
+                dataAccessLayer.DateOfBirthValidatorText = "";
             }
 
-            if (string.IsNullOrEmpty(age))
+            if (string.IsNullOrEmpty(age.ToString()))
             {
-                dataLogic.AgeValidatorText = requiredMessage;
+                dataAccessLayer.AgeValidatorText = requiredMessage;
                 isValid = false;
             }
-            else if (int.Parse(age) > 99 || int.Parse(age) < 5)
+            else if (age > 99 || age < 5)
             {
-                dataLogic.AgeValidatorText = "Age value should be\n between 5 and 99";
+                dataAccessLayer.AgeValidatorText = "Age value should be\n between 5 and 99";
                 isValid = false;
             }
             else
             {
-                dataLogic.AgeValidatorText = "";
+                dataAccessLayer.AgeValidatorText = "";
             }
 
             return isValid;

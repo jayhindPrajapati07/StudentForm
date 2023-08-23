@@ -144,6 +144,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1230, 834);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "StudentDetailForm";
             ShowIcon = false;

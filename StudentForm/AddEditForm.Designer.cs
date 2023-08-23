@@ -424,6 +424,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(852, 834);
             Controls.Add(panel);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "AddEditForm";
             ShowIcon = false;

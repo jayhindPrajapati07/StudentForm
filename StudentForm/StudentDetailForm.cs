@@ -13,10 +13,10 @@ namespace StudentForm
         private void RefreshDataGridView()
         {
             dataGridView.Rows.Clear();
-            foreach (var studentData in DataLogic.studentList)
+            foreach (var studentData in DataAccessLayer.studentList)
             {
                 //dataGridView.Rows.Add(studentData);
-                string[] stdData=new string[6];
+                string[] stdData = new string[6];
                 for (int i = 0; i < 6; i++)
                 {
                     stdData[i] = studentData[i];
@@ -46,9 +46,9 @@ namespace StudentForm
                 AddEditForm addEditForm = new AddEditForm();
                 addEditForm.setMain(this);
                 id = dataGridView.Rows[rowIndex].Cells[0].Value.ToString();
-                for (int i = 0; i < DataLogic.studentList.Count; i++)
+                for (int i = 0; i < DataAccessLayer.studentList.Count; i++)
                 {
-                    if (DataLogic.studentList[i][0] == id) rowIndex = i;
+                    if (DataAccessLayer.studentList[i][0] == id) rowIndex = i;
                 }
                 addEditForm.StudentHeaderText = "Edit Students";
                 addEditForm.LoadData();
@@ -73,9 +73,9 @@ namespace StudentForm
             {
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
-                    string stdFirstNameCellData = dataGridView.Rows[i].Cells[0].Value.ToString().ToLower();
-                    string stdLastNameCellData = dataGridView.Rows[i].Cells[1].Value.ToString().ToLower();
-                    string stdAgeCellData = dataGridView.Rows[i].Cells[3].Value.ToString();
+                    string stdFirstNameCellData = dataGridView.Rows[i].Cells[1].Value.ToString().ToLower();
+                    string stdLastNameCellData = dataGridView.Rows[i].Cells[2].Value.ToString().ToLower();
+                    string stdAgeCellData = dataGridView.Rows[i].Cells[4].Value.ToString();
                     stdAgeCellData = stdAgeCellData.Substring(0, 2).Trim();
 
                     if (stdFirstNameCellData.Contains(SearchText) || stdLastNameCellData.Contains(SearchText) || stdAgeCellData.Contains(SearchText))
@@ -116,8 +116,8 @@ namespace StudentForm
             dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
             dataGridView.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 13);
 
-            DataLogic dataLogic = new DataLogic();
-            dataLogic.defaultStudents();
+            DataAccessLayer dataAccessLayer = new DataAccessLayer();
+            dataAccessLayer.defaultStudents();
             RefreshDataGridView();
             dataGridView.Rows[0].Selected = true;
             txtSearch.MaxLength = 30;

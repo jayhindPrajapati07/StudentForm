@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace StudentForm
 {
-    internal class DataLogic
+    internal class DataAccessLayer
     {
-        public DataLogic()
+        public DataAccessLayer()
         {
             FirstNameValidatorText = "";
             LastNameValidatorText = "";
@@ -17,18 +17,12 @@ namespace StudentForm
             DateOfBirthValidatorText = "";
             AgeValidatorText = "";
         }
-
-        //public int StudentId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Gender { get; set; }
-        public int GenderIndex { get; set; }
-        public string Age { get; set; }
-        public string Class { get; set; }
-        public string DateOfBirth { get; set; }
-        public string Address { get; set; }
-        public DateTime DateOfBirthDate { get; set; }
-
+        StudentModel studentModel;
+        public void setStudentModel(StudentModel studentModel)
+        {
+            this.studentModel = studentModel;
+        }
+        
         string years = " years";
         
         public static List<string[]> studentList = new List<string[]>();
@@ -43,12 +37,12 @@ namespace StudentForm
         public void AddData()
         {
             int StudentId = int.Parse(studentList[studentList.Count - 1][0])+1;
-            string[] studentData = {StudentId.ToString(), FirstName, LastName, Gender, Age+years, Class, Address ,DateOfBirth};
+            string[] studentData = {StudentId.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age +years, studentModel.Class, studentModel.Address , studentModel.DateOfBirth };
             studentList.Add(studentData);
         }
         public void UpdateData(int index)
         {
-            string[] studentData = {index.ToString(), FirstName, LastName, Gender, Age+years, Class, Address ,DateOfBirth};
+            string[] studentData = {index.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age + years, studentModel.Class, studentModel.Address, studentModel.DateOfBirth };
             studentList.RemoveAt(index);
             studentList.Insert(index, studentData);
         }

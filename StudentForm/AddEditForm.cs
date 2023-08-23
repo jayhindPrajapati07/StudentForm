@@ -26,20 +26,23 @@ namespace StudentForm
         public string StudentHeaderText;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DataLogic getsetData = new DataLogic();
+            DataAccessLayer getsetData = new DataAccessLayer();
+            StudentModel studentModel = new StudentModel();
+            getsetData.setStudentModel(studentModel);
 
-            getsetData.FirstName = txtFirstName.Text.Trim();
-            getsetData.LastName = txtLastName.Text.Trim();
-            getsetData.GenderIndex = cmbGender.SelectedIndex;
-            getsetData.Gender = cmbGender.Text;
-            getsetData.DateOfBirth = dtDateOfBirth.Text;
-            getsetData.Age = txtAge.Text.Trim();
-            getsetData.Class = txtClass.Text.Trim();
-            getsetData.Address = textAreaAddress.Text.Trim();
-            getsetData.DateOfBirth= dtDateOfBirth.Text;
+            studentModel.FirstName = txtFirstName.Text.Trim();
+            studentModel.LastName = txtLastName.Text.Trim();
+            studentModel.GenderIndex = cmbGender.SelectedIndex;
+            studentModel.Gender = cmbGender.Text;
+            studentModel.DateOfBirth = dtDateOfBirth.Text;
+            studentModel.Age = int.Parse(txtAge.Text.Trim());
+            studentModel.Class = txtClass.Text.Trim();
+            studentModel.Address = textAreaAddress.Text.Trim();
+            studentModel.DateOfBirth = dtDateOfBirth.Text;
 
             AddEditBuisnessLogic validator = new AddEditBuisnessLogic();
-            validator.setDataLogic(getsetData);
+            validator.setdataAccessLayer(getsetData);
+            validator.setStudentModel(studentModel);
 
             bool Validated = validator.ValidateFields();
             if (Validated == false)
@@ -73,7 +76,7 @@ namespace StudentForm
         public void LoadData()
         {
             int index = studentDetailForm.rowIndex;
-            string[] DataToEdit = DataLogic.studentList[index];
+            string[] DataToEdit = DataAccessLayer.studentList[index];
             txtFirstName.Text = DataToEdit[1];
             txtLastName.Text = DataToEdit[2];
             cmbGender.Text = DataToEdit[3];
@@ -95,7 +98,7 @@ namespace StudentForm
             var confirmResult = MessageBox.Show("Are you sure you want to delete this student record?", "Confirm Delete!!", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                DataLogic deleteData =new DataLogic();
+                DataAccessLayer deleteData = new DataAccessLayer();
                 deleteData.DeleteData(index);
                 Close();
             }
@@ -109,23 +112,23 @@ namespace StudentForm
             {
                 AddEditBuisnessLogic ageCalculator = new AddEditBuisnessLogic();
                 int age;
-                ageCalculator.ageCalc(dtDateOfBirth.Value,out age);
-                txtAge.Text=age.ToString();
+                ageCalculator.ageCalc(dtDateOfBirth.Value, out age);
+                txtAge.Text = age.ToString();
                 if (txtAge.Text == "0") txtAge.Text = "";
             }
         }
-        
+
 
         //Set Date Of Birth from Age
         private void txtAge_KeyUp(object sender, KeyEventArgs e)
         {
             AddEditBuisnessLogic dobCalculator = new AddEditBuisnessLogic();
             DateTime date;
-            dobCalculator.dobCalc(txtAge.Text,out date);
+            dobCalculator.dobCalc(txtAge.Text, out date);
             dtDateOfBirth.Value = date;
         }
 
-        
+
 
         private void HandleKeyPress(object sender, KeyPressEventArgs e)
         {
