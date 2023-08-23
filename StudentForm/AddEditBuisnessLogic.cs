@@ -8,11 +8,7 @@ namespace StudentForm
 {
     internal class AddEditBuisnessLogic 
     {
-        DataAccessLayer dataAccessLayer;
-        public void setdataAccessLayer(DataAccessLayer dataAccessLayer)
-        {
-            this.dataAccessLayer = dataAccessLayer;
-        }
+
 
         StudentModel studentModel;
         public void setStudentModel(StudentModel studentModel)
@@ -34,67 +30,67 @@ namespace StudentForm
 
             if (string.IsNullOrEmpty(firstName))
             {
-                dataAccessLayer.FirstNameValidatorText = requiredMessage;
+                FirstNameValidatorText = requiredMessage;
                 isValid = false;
             }
             else if (firstName.Length > 15 || firstName.Length < 3)
             {
-                dataAccessLayer.FirstNameValidatorText = "The First Name field should have min 3 characters and max 15 characters";
+                FirstNameValidatorText = "The First Name field should have min 3 characters and max 15 characters";
                 isValid = false;
             }
             else
             {
-                dataAccessLayer.FirstNameValidatorText = "";
+                FirstNameValidatorText = "";
             }
 
             if (string.IsNullOrEmpty(lastName))
             {
-                dataAccessLayer.LastNameValidatorText = requiredMessage;
+                LastNameValidatorText = requiredMessage;
                 isValid = false;
             }
             else if (lastName.Length > 18 || lastName.Length < 2)
             {
-                dataAccessLayer.LastNameValidatorText = "The last Name field should have min 2 characters and max 18 characters";
+                LastNameValidatorText = "The last Name field should have min 2 characters and max 18 characters";
                 isValid = false;
             }
             else
             {
-                dataAccessLayer.LastNameValidatorText = "";
+                LastNameValidatorText = "";
             }
 
             if (gender == -1)
             {
-                dataAccessLayer.GenderValidatorText = requiredMessage;
+                GenderValidatorText = requiredMessage;
                 isValid = false;
             }
             else
             {
-                dataAccessLayer.GenderValidatorText = "";
+                GenderValidatorText = "";
             }
 
             if (dateOfBirth == DateTime.Now.Date.ToString())
             {
-                dataAccessLayer.DateOfBirthValidatorText = requiredMessage;
+                DateOfBirthValidatorText = requiredMessage;
                 isValid = false;
             }
             else
             {
-                dataAccessLayer.DateOfBirthValidatorText = "";
+                DateOfBirthValidatorText = "";
             }
 
-            if (string.IsNullOrEmpty(age.ToString()))
+            if (age==0)
             {
-                dataAccessLayer.AgeValidatorText = requiredMessage;
+                AgeValidatorText = requiredMessage;
                 isValid = false;
             }
             else if (age > 99 || age < 5)
             {
-                dataAccessLayer.AgeValidatorText = "Age value should be\n between 5 and 99";
+                AgeValidatorText = "Age value should be\n between 5 and 99";
                 isValid = false;
             }
             else
             {
-                dataAccessLayer.AgeValidatorText = "";
+                AgeValidatorText = "";
             }
 
             return isValid;
@@ -121,5 +117,11 @@ namespace StudentForm
                 dob = DateTime.Now.Date.AddYears(-age1);
             }
         }
+
+        public string FirstNameValidatorText { get; set; }
+        public string LastNameValidatorText { get; set; }
+        public string GenderValidatorText { get; set; }
+        public string DateOfBirthValidatorText { get; set; }
+        public string AgeValidatorText { get; set; }
     }
 }

@@ -26,39 +26,39 @@ namespace StudentForm
         public string StudentHeaderText;
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DataAccessLayer getsetData = new DataAccessLayer();
+            DataAccessLayer dataAccessLayer = new DataAccessLayer();
             StudentModel studentModel = new StudentModel();
-            getsetData.setStudentModel(studentModel);
+            dataAccessLayer.setStudentModel(studentModel);
 
             studentModel.FirstName = txtFirstName.Text.Trim();
             studentModel.LastName = txtLastName.Text.Trim();
             studentModel.GenderIndex = cmbGender.SelectedIndex;
             studentModel.Gender = cmbGender.Text;
             studentModel.DateOfBirth = dtDateOfBirth.Text;
-            studentModel.Age = int.Parse(txtAge.Text.Trim());
+            if (txtAge.Text.Trim() == "") { studentModel.Age = 0; } else { studentModel.Age = int.Parse(txtAge.Text); }
             studentModel.Class = txtClass.Text.Trim();
             studentModel.Address = textAreaAddress.Text.Trim();
             studentModel.DateOfBirth = dtDateOfBirth.Text;
 
             AddEditBuisnessLogic validator = new AddEditBuisnessLogic();
-            validator.setdataAccessLayer(getsetData);
+            //validator.setdataAccessLayer(dataAccessLayer);
             validator.setStudentModel(studentModel);
 
             bool Validated = validator.ValidateFields();
             if (Validated == false)
             {
-                lblFirstNameValidator.Text = getsetData.FirstNameValidatorText;
-                lblLastNameValidator.Text = getsetData.LastNameValidatorText;
-                lblGenderValidator.Text = getsetData.GenderValidatorText;
-                lblDateOfBirthValidator.Text = getsetData.DateOfBirthValidatorText;
-                lblAgeValidator.Text = getsetData.AgeValidatorText;
+                lblFirstNameValidator.Text = validator.FirstNameValidatorText;
+                lblLastNameValidator.Text = validator.LastNameValidatorText;
+                lblGenderValidator.Text = validator.GenderValidatorText;
+                lblDateOfBirthValidator.Text = validator.DateOfBirthValidatorText;
+                lblAgeValidator.Text = validator.AgeValidatorText;
             }
 
             if (StudentHeaderText == "Add Students")
             {
                 if (Validated)
                 {
-                    getsetData.AddData();
+                    dataAccessLayer.AddData();
                     Close();
                 }
             }
@@ -67,7 +67,7 @@ namespace StudentForm
                 if (Validated)
                 {
                     int index = studentDetailForm.rowIndex;
-                    getsetData.UpdateData(index);
+                    dataAccessLayer.UpdateData(index);
                     Close();
                 }
             }

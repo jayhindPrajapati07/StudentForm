@@ -9,14 +9,7 @@ namespace StudentForm
 {
     internal class DataAccessLayer
     {
-        public DataAccessLayer()
-        {
-            FirstNameValidatorText = "";
-            LastNameValidatorText = "";
-            GenderValidatorText = "";
-            DateOfBirthValidatorText = "";
-            AgeValidatorText = "";
-        }
+
         StudentModel studentModel;
         public void setStudentModel(StudentModel studentModel)
         {
@@ -52,10 +45,5 @@ namespace StudentForm
             studentList.RemoveAt(index);
         }
 
-        public string FirstNameValidatorText { get; set; }
-        public string LastNameValidatorText { get;set; }
-        public string GenderValidatorText { get; set; }
-        public string DateOfBirthValidatorText { get; set; }
-        public string AgeValidatorText { get; set; }
     }
 }
