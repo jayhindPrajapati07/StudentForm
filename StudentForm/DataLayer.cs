@@ -29,7 +29,8 @@ namespace StudentForm
         
         public void AddData()
         {
-            int StudentId = int.Parse(studentList[studentList.Count - 1][0])+1;
+            int StudentId;
+            if (studentList.Count != 0) {StudentId= int.Parse(studentList[studentList.Count - 1][0]) + 1; } else { StudentId= 0;}
             string[] studentData = {StudentId.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age +years, studentModel.Class, studentModel.Address , studentModel.DateOfBirth.ToString() ,studentModel.GenderIndex.ToString()};
             studentList.Add(studentData);
         }
