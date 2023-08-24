@@ -35,12 +35,11 @@ namespace StudentForm
             studentModel.GenderIndex = cmbGender.SelectedIndex;
             studentModel.Gender = cmbGender.Text;
             studentModel.DateOfBirth = dtDateOfBirth.Value;
-            if (txtAge.Text.Trim() == "") { studentModel.Age = 0; } else { studentModel.Age = int.Parse(txtAge.Text); }
+            studentModel.Age = txtAge.Text.Trim() == "" ? 0 : int.Parse(txtAge.Text);
             studentModel.Class = txtClass.Text.Trim();
             studentModel.Address = textAreaAddress.Text.Trim();
 
             AddEditBuisnessLogic validator = new AddEditBuisnessLogic();
-            //validator.setdataAccessLayer(dataAccessLayer);
             validator.setStudentModel(studentModel);
 
             bool Validated = validator.ValidateFields();
@@ -106,14 +105,11 @@ namespace StudentForm
         //Set Age from Date Of Birth
         private void dtDateOfBirth_ValueChanged(object sender, EventArgs e)
         {
-            if (dtDateOfBirth.Text != "")
-            {
-                AddEditBuisnessLogic ageCalculator = new AddEditBuisnessLogic();
-                int age;
-                ageCalculator.ageCalc(dtDateOfBirth.Value, out age);
-                txtAge.Text = age.ToString();
-                if (txtAge.Text == "0") txtAge.Text = "";
-            }
+            AddEditBuisnessLogic ageCalculator = new AddEditBuisnessLogic();
+            int age;
+            ageCalculator.ageCalc(dtDateOfBirth.Value, out age);
+            txtAge.Text = age.ToString();
+            if (txtAge.Text == "0") txtAge.Text = "";
         }
 
 
@@ -171,8 +167,37 @@ namespace StudentForm
                 btnDelete.Visible = false;
                 setGenderPlaceHolder();
             }
+            setDefaultLayout();
         }
+        private void setDefaultLayout()
+        {
+            Fonts fonts = new Fonts();
+            panel.Font = fonts.mediumFont;
+            LoopThroughControls(this);
+            lblStudentHeader.Font = fonts.LargeFont;
+            lblFirstNameValidator.Font = fonts.smallFont;
+            lblLastNameValidator.Font = fonts.smallFont;
+            lblGenderValidator.Font = fonts.smallFont;
+            lblDateOfBirthValidator.Font = fonts.smallFont;
+            lblAgeValidator.Font = fonts.smallFont;
+            lblyears.Font = fonts.smallFont;
+            btnSave.BackColor = fonts.btnPrimary;
+            btnCancel.BackColor = fonts.btnSecondary;
+            btnDelete.ForeColor = fonts.btnDanger;
 
+        }
+        private void LoopThroughControls(Control parentControl)
+        {
+            foreach (Control control in parentControl.Controls)
+            {
+                Fonts fonts = new Fonts();
+                control.Font = fonts.mediumFont;
+                if (control.HasChildren)
+                {
+                    LoopThroughControls(control);
+                }
+            }
+        }
         //PlaceHolder For Gender
         private void setGenderPlaceHolder()
         {

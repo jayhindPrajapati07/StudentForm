@@ -49,7 +49,7 @@ namespace StudentForm
                 id = dataGridView.Rows[rowIndex].Cells[0].Value.ToString();
                 for (int i = 0; i < DataLayer.studentList.Count; i++)
                 {
-                    if (DataLayer.studentList[i][0] == id) rowIndex = i;
+                    if (DataLayer.studentList[i][0] == id) rowIndex = i;  
                 }
                 action = "Edit";
                 addEditForm.StudentHeaderText = "Edit Students";
@@ -97,7 +97,6 @@ namespace StudentForm
         {
             // Populating data with two rows
             dataGridView.Columns.Add("StudentId", "StudentId");
-            dataGridView.Columns[0].Visible = false;
             dataGridView.Columns.Add("First Name", "First Name");
             dataGridView.Columns.Add("Last Name", "Last Name");
             dataGridView.Columns.Add("Gender", "Gender");
@@ -105,24 +104,36 @@ namespace StudentForm
             dataGridView.Columns.Add("Class", "Class");
 
             int columnWidth = 223;
+            dataGridView.Columns[0].Visible = false;
             dataGridView.Columns[1].Width = columnWidth;
             dataGridView.Columns[2].Width = columnWidth;
             dataGridView.Columns[3].Width = columnWidth;
             dataGridView.Columns[4].Width = columnWidth;
             dataGridView.Columns[5].Width = columnWidth;
 
-            dataGridView.EnableHeadersVisualStyles = false;
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
-            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
-            dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
-            dataGridView.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 13);
+            setDefaultLayout();
 
             DataLayer dataLayer = new DataLayer();
             dataLayer.defaultStudents();
             RefreshDataGridView();
             dataGridView.Rows[0].Selected = true;
             txtSearch.MaxLength = 30;
+        }
+
+        private void setDefaultLayout()
+        {
+            Fonts fonts = new Fonts();
+            dataGridView.EnableHeadersVisualStyles = false;
+            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = fonts.selectionForeColor;
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor =fonts.selectionColor;
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(fonts.mediumFont, FontStyle.Bold);
+            dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = fonts.selectionColor;
+            dataGridView.DefaultCellStyle.Font = fonts.mediumFont;
+            dataGridView.AlternatingRowsDefaultCellStyle = dataGridView.DefaultCellStyle;
+            lblStudentHeader.Font = fonts.LargeFont;
+            btnAdd.Font = fonts.mediumFont;
+            btnAdd.BackColor = fonts.btnPrimary;
+            txtSearch.Font = fonts.mediumFont;
         }
 
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
