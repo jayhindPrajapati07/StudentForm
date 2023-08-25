@@ -15,17 +15,13 @@ namespace StudentForm
             dataGridView.Rows.Clear();
             foreach (var studentData in DataLayer.studentList)
             {
-                //dataGridView.Rows.Add(studentData);
                 string[] stdData = new string[6];
-                for (int i = 0; i < 6; i++)
-                {
-                    stdData[i] = studentData[i];
-                }
+                Array.Copy(studentData, stdData, 6);
                 dataGridView.Rows.Add(stdData);
             }
         }
 
-        public int rowIndex;
+        public int Id;
         public bool deleteVisible = false;
         public string action;
         private void btnAdd_Click(object sender, EventArgs e)
@@ -40,16 +36,16 @@ namespace StudentForm
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            rowIndex = e.RowIndex;
+            Id = e.RowIndex;
             string id;
-            if (rowIndex >= 0)
+            if (Id >= 0)
             {
                 AddEditForm addEditForm = new AddEditForm();
                 addEditForm.setMain(this);
-                id = dataGridView.Rows[rowIndex].Cells[0].Value.ToString();
+                id = dataGridView.Rows[Id].Cells[0].Value.ToString();
                 for (int i = 0; i < DataLayer.studentList.Count; i++)
                 {
-                    if (DataLayer.studentList[i][0] == id) rowIndex = i;  
+                    if (DataLayer.studentList[i][0] == id) { Id = i; break; };  
                 }
                 action = "Edit";
                 addEditForm.StudentHeaderText = "Edit Students";
@@ -95,7 +91,6 @@ namespace StudentForm
         }
         private void StudentDetailForm_Load(object sender, EventArgs e)
         {
-            // Populating data with two rows
             dataGridView.Columns.Add("StudentId", "StudentId");
             dataGridView.Columns.Add("First Name", "First Name");
             dataGridView.Columns.Add("Last Name", "Last Name");

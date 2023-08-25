@@ -64,17 +64,17 @@ namespace StudentForm
             {
                 if (Validated)
                 {
-                    int index = studentDetailForm.rowIndex;
-                    dataLayer.UpdateData(index);
+                    int id = studentDetailForm.Id;
+                    dataLayer.UpdateData(id);
                     Close();
                 }
             }
         }
 
-        public void LoadData()
+        internal void LoadData()
         {
-            int index = studentDetailForm.rowIndex;
-            string[] DataToEdit = DataLayer.studentList[index];
+            int id = studentDetailForm.Id;
+            string[] DataToEdit = DataLayer.studentList[id];
             txtFirstName.Text = DataToEdit[1];
             txtLastName.Text = DataToEdit[2];
             txtClass.Text = DataToEdit[5];
@@ -91,12 +91,12 @@ namespace StudentForm
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int index = studentDetailForm.rowIndex;
+            int id = studentDetailForm.Id;
             var confirmResult = MessageBox.Show("Are you sure you want to delete this student record?", "Confirm Delete!!", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
                 DataLayer dataLayer = new DataLayer();
-                dataLayer.DeleteData(index);
+                dataLayer.DeleteData(id);
                 Close();
             }
         }
