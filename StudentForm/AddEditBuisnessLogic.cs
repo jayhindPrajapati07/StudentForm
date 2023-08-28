@@ -11,14 +11,14 @@ namespace StudentForm
 
 
         StudentModel studentModel;
-        public void setStudentModel(StudentModel studentModel)
+        internal void setStudentModel(StudentModel studentModel)
         {
             this.studentModel = studentModel;
         }
 
-        string requiredMessage = "This field is required";
+        private string requiredMessage = "This field is required";
 
-        public bool ValidateFields()
+        internal bool ValidateFields()
         {
             bool isValid = true;
 
@@ -97,13 +97,13 @@ namespace StudentForm
         }
 
         //Calculate Age from DateOfBirth
-        public void ageCalc(DateTime dob, out int age)
+        internal void ageCalc(DateTime dob, out int age)
         {
             age = (DateTime.Now.Date.Year - dob.Date.Year);
         }
 
         //Calculate DateOfBirth from Age
-        public void dobCalc(string Age, out DateTime dob)
+        internal void dobCalc(string Age, out DateTime dob)
         {
             string age = Age;
             if (age == "" || int.Parse(age) > 99)

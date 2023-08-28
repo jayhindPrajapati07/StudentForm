@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,11 +21,11 @@ namespace StudentForm
         }
 
         StudentDetailForm studentDetailForm;
-        public void setMain(StudentDetailForm studentDetailForm)
+        internal void setMain(StudentDetailForm studentDetailForm)
         {
             this.studentDetailForm = studentDetailForm;
         }
-        public string StudentHeaderText;
+        internal string StudentHeaderText;
         private void btnSave_Click(object sender, EventArgs e)
         {
             DataLayer dataLayer = new DataLayer();
@@ -57,6 +59,7 @@ namespace StudentForm
                 if (Validated)
                 {
                     dataLayer.AddData();
+                    studentDetailForm.refreshRequired = true;
                     Close();
                 }
             }
@@ -66,6 +69,7 @@ namespace StudentForm
                 {
                     int id = studentDetailForm.Id;
                     dataLayer.UpdateData(id);
+                    studentDetailForm.refreshRequired = true;
                     Close();
                 }
             }
@@ -83,7 +87,6 @@ namespace StudentForm
             int genderIndex = int.Parse(DataToEdit[8]);
             cmbGender.Text = cmbGender.Items[genderIndex].ToString();
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -97,6 +100,7 @@ namespace StudentForm
             {
                 DataLayer dataLayer = new DataLayer();
                 dataLayer.DeleteData(id);
+                studentDetailForm.refreshRequired = true;
                 Close();
             }
         }
@@ -106,8 +110,7 @@ namespace StudentForm
         private void dtDateOfBirth_ValueChanged(object sender, EventArgs e)
         {
             AddEditBuisnessLogic ageCalculator = new AddEditBuisnessLogic();
-            int age;
-            ageCalculator.ageCalc(dtDateOfBirth.Value, out age);
+            ageCalculator.ageCalc(dtDateOfBirth.Value, out int age);
             txtAge.Text = age.ToString();
             if (txtAge.Text == "0") txtAge.Text = "";
         }
@@ -116,9 +119,14 @@ namespace StudentForm
         //Set Date Of Birth from Age
         private void txtAge_KeyUp(object sender, KeyEventArgs e)
         {
+            //if (txtAge.Text == "0" ||txtAge.Text=="00") { txtAge.Text = ""; }
+            //else {
+            //    AddEditBuisnessLogic dobCalculator = new AddEditBuisnessLogic();
+            //    dobCalculator.dobCalc(txtAge.Text, out DateTime date);
+            //    dtDateOfBirth.Value = date;
+            //}
             AddEditBuisnessLogic dobCalculator = new AddEditBuisnessLogic();
-            DateTime date;
-            dobCalculator.dobCalc(txtAge.Text, out date);
+            dobCalculator.dobCalc(txtAge.Text, out DateTime date);
             dtDateOfBirth.Value = date;
         }
 
@@ -148,10 +156,10 @@ namespace StudentForm
             }
         }
 
+        //Form Load
         private void AddEditForm_Load(object sender, EventArgs e)
         {
-            var todaysDate = DateTime.Now.Date;
-            dtDateOfBirth.MaxDate = todaysDate;
+            dtDateOfBirth.MaxDate = DateTime.Now.Date;
             dtDateOfBirth.MinDate = DateTime.Parse("1/1/" + (DateTime.Now.Date.Year - 100));
             lblStudentHeader.Text = StudentHeaderText;
             btnDelete.Visible = true;
@@ -160,7 +168,7 @@ namespace StudentForm
             txtLastName.MaxLength = 47;
             txtClass.MaxLength = 47;
             textAreaAddress.MaxLength = 300;
-
+            studentDetailForm.refreshRequired = false;
             if (lblStudentHeader.Text == "Add Students")
             {
                 dtDateOfBirth.Text = DateTime.Now.ToShortDateString();

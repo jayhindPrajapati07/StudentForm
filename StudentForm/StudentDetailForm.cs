@@ -21,9 +21,9 @@ namespace StudentForm
             }
         }
 
-        public int Id;
-        public bool deleteVisible = false;
-        public string action;
+        internal int Id;
+        internal string action;
+        internal bool refreshRequired;
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddEditForm addEditForm = new AddEditForm();
@@ -31,7 +31,7 @@ namespace StudentForm
             action = "Add";
             addEditForm.StudentHeaderText = "Add Students";
             addEditForm.ShowDialog();
-            RefreshDataGridView();
+            if(refreshRequired) { RefreshDataGridView(); }
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -45,14 +45,13 @@ namespace StudentForm
                 id = dataGridView.Rows[Id].Cells[0].Value.ToString();
                 for (int i = 0; i < DataLayer.studentList.Count; i++)
                 {
-                    if (DataLayer.studentList[i][0] == id) { Id = i; break; };  
+                    if (DataLayer.studentList[i][0] == id) { Id = i; break; };
                 }
                 action = "Edit";
                 addEditForm.StudentHeaderText = "Edit Students";
                 addEditForm.LoadData();
-                deleteVisible = true;
                 addEditForm.ShowDialog();
-                RefreshDataGridView();
+                if (refreshRequired) { RefreshDataGridView(); }
             }
         }
 
@@ -74,7 +73,7 @@ namespace StudentForm
                     string stdFirstNameCellData = dataGridView.Rows[i].Cells[1].Value.ToString().ToLower();
                     string stdLastNameCellData = dataGridView.Rows[i].Cells[2].Value.ToString().ToLower();
                     string stdAgeCellData = dataGridView.Rows[i].Cells[4].Value.ToString();
-                    stdAgeCellData = stdAgeCellData.Substring(0, 2).Trim();
+                    stdAgeCellData = stdAgeCellData[..2].Trim();
 
                     if (stdFirstNameCellData.Contains(SearchText) || stdLastNameCellData.Contains(SearchText) || stdAgeCellData.Contains(SearchText))
                     {
@@ -120,7 +119,7 @@ namespace StudentForm
             Fonts fonts = new Fonts();
             dataGridView.EnableHeadersVisualStyles = false;
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = fonts.selectionForeColor;
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor =fonts.selectionColor;
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = fonts.selectionColor;
             dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(fonts.mediumFont, FontStyle.Bold);
             dataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = fonts.selectionColor;
             dataGridView.DefaultCellStyle.Font = fonts.mediumFont;

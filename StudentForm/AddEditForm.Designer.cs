@@ -97,13 +97,13 @@
             PanelContainer.Controls.Add(btnCancel);
             PanelContainer.Controls.Add(btnDelete);
             PanelContainer.Controls.Add(btnSave);
-            PanelContainer.Controls.Add(lblAddress);
+            PanelContainer.Controls.Add(lblFirstName);
             PanelContainer.Controls.Add(lblLastName);
             PanelContainer.Controls.Add(lblGender);
             PanelContainer.Controls.Add(lblDateOfBirth);
-            PanelContainer.Controls.Add(lblClass);
             PanelContainer.Controls.Add(lblAge);
-            PanelContainer.Controls.Add(lblFirstName);
+            PanelContainer.Controls.Add(lblClass);
+            PanelContainer.Controls.Add(lblAddress);
             PanelContainer.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
             PanelContainer.Location = new Point(53, 132);
             PanelContainer.Name = "PanelContainer";
