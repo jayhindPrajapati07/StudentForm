@@ -14,22 +14,17 @@ namespace StudentForm1.Controllers
             _logger = logger;
         }
 
+
         public IActionResult StudentDetailForm()
         {
             return View();
         }
 
-        //public IActionResult AddEditForm()
-        //{
-        //    return View();
-        //}
         [HttpGet("/home/AddEditForm")]
         public IActionResult AddEditForm(string h1Text)
         {
-            // Your controller logic here
-            return View(); // Return the view or perform other actions as needed
+            return View(); 
         }
-
 
         private static bool defaultStudentAdded = false;
         DataLayer dataLayer = new DataLayer();
@@ -52,7 +47,6 @@ namespace StudentForm1.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] StudentModel studentModel)
         {
-            // Your logic here
             addDefaultStudent();
             dataLayer.setStudentModel(studentModel);
             dataLayer.AddData();
@@ -62,7 +56,6 @@ namespace StudentForm1.Controllers
         [HttpPost]
         public IActionResult Edit([FromBody] StudentModel studentModel)
         {
-            // Your logic here
             dataLayer.setStudentModel(studentModel);
             dataLayer.UpdateData(studentModel.studentId);
             return Ok("Data received and processed successfully");
@@ -72,7 +65,6 @@ namespace StudentForm1.Controllers
         [HttpPost]
         public IActionResult Delete([FromBody] int studentId)
         {
-            // Your logic here
             dataLayer.DeleteData(studentId);
             return Ok("Data received and processed successfully");
         }

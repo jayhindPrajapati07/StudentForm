@@ -22,7 +22,8 @@ if (urlParams) {
         Gender.value = urlParams.get('gender');
 
         const dobString = urlParams.get('dob');
-        const dobDate = new Date(dobString); // Parse the date string into a Date object
+        const dobDate = new Date(dobString);
+        dobDate.setMinutes(dobDate.getMinutes() + 330);
         const dobISOString = dobDate.toISOString().split('T')[0];
         DateOfBirth.value = dobISOString;
         let age = urlParams.get('age');
@@ -262,21 +263,3 @@ DateOfBirth.addEventListener('keydown', function (e) {
     e.preventDefault();
 });
 
-
-
-//document.addEventListener("DOMContentLoaded", function () {
-//var saveBtn = document.getElementById("saveBtn");
-//saveBtn.addEventListener("click", function (event) {
-//    event.preventDefault(); // Prevent the default form submission behavior
-
-//var xhr = new XMLHttpRequest();
-//xhr.open("GET", "/Home/MyJson", true);
-//xhr.onreadystatechange = function () {
-//        if (xhr.readyState === 4 && xhr.status === 200) {
-//            var data = JSON.parse(xhr.responseText);
-//console.log(data.def);
-//        }
-//    };
-//xhr.send();
-//});
-//});

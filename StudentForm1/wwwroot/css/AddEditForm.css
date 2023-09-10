@@ -147,7 +147,7 @@ span {
         font-size: .8em;
     }
 
-    .btn-2 button:nth-child(2) {
+    .btn-2 a {
         background-color: #f0f0f0;
         color: #000000;
         border-style: none;
