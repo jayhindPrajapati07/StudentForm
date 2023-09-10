@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataLayer\BackEnd.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="StudentDetailForm.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

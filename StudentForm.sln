@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForm", "StudentForm\StudentForm.csproj", "{ACD6E91F-1DE7-4309-9BFC-EDCDAE43663C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForm", "StudentForm\StudentForm.csproj", "{ACD6E91F-1DE7-4309-9BFC-EDCDAE43663C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "DataLayer\BackEnd.csproj", "{6D12AF3F-3BAE-4A1E-837A-C081D02363FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForm1", "StudentForm1\StudentForm1.csproj", "{9C729ABE-72A4-4145-ABE4-12AA3B7FCFF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{ACD6E91F-1DE7-4309-9BFC-EDCDAE43663C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD6E91F-1DE7-4309-9BFC-EDCDAE43663C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACD6E91F-1DE7-4309-9BFC-EDCDAE43663C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D12AF3F-3BAE-4A1E-837A-C081D02363FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D12AF3F-3BAE-4A1E-837A-C081D02363FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D12AF3F-3BAE-4A1E-837A-C081D02363FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D12AF3F-3BAE-4A1E-837A-C081D02363FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C729ABE-72A4-4145-ABE4-12AA3B7FCFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C729ABE-72A4-4145-ABE4-12AA3B7FCFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C729ABE-72A4-4145-ABE4-12AA3B7FCFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C729ABE-72A4-4145-ABE4-12AA3B7FCFF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

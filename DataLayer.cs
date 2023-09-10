@@ -1,4 +1,7 @@
-﻿namespace StudentForm
+﻿using System;
+using System.Collections.Generic;
+
+namespace StudentForm
 {
     internal class DataLayer
     {

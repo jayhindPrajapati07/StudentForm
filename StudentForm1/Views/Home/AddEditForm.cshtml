@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<div class="main-container1">
+
+    <div class="formLayout">
+        <h1>Add Student</h1>
+        <form class="form">
+            @* onsubmit="return saveData()" action="/Index" *@
+            <div class="inputs">
+                <label for="firstName">First Name <span>*</span></label>
+                <div>
+                    <input type="text" maxlength="20" name="firstName" id="firstName" placeholder="Please enter First Name">
+                    <label class="fname-err error"></label>
+                </div>
+            </div>
+            <div class="inputs">
+                <label for="lastName">Last Name <span>*</span></label>
+                <div class="col-sm-9">
+                    <input type="text" name="lastName" id="lastName" placeholder="Please enter Last Name">
+                    <label class="lname-err error"></label>
+                </div>
+            </div>
+            <div class="inputs">
+                <label for="gender">Gender <span>*</span></label>
+                <div>
+                    <select class="selectGender" aria-label="Default select example" name="gender" id="gender">
+                        <option value="2" selected>Select Gender</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                    <label class="gender-err error"></label>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-group-1">
+                    <label for="dateOfBirth" class="dob-label">Date of Birth <span>*</span></label>
+                    <div class="dob">
+                        <input type="date" class="date-of-birth" name="dateOfBirth" id="dateOfBirth" min="1923-01-01" max="2023-09-06">
+                        <label class="dob-err error"></label>
+                    </div>
+                </div>
+                <div class="input-group-2">
+                    <label for="age">Age <span>*</span></label>
+                    <div>
+                        <div>
+                            <input type="text" maxlength="2" class="age" name="age" id="age">
+                            <span>years</span>
+                        </div>
+                        <label class="age-err error"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="inputs">
+                <label for="class">Class</label>
+                <div class="col-sm-4 px-1 ms-2">
+                    <input type="text" name="class" id="class" placeholder="Please enter class">
+
+                </div>
+            </div>
+            <div class="inputs">
+                <label for="address">Address</label>
+                <div>
+                    <textarea name="address" id="address" class="address" rows="3" placeholder="Please enter address"></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <div class="btn-1">
+                    <button id="deleteBtn" class="hide">Delete</button>
+                </div>
+                <div class="btn-2">
+                    <button id="saveBtn" >Save</button>
+                    @*type="submit" *@
+                    <button><a asp-controller="Home" asp-action="StudentDetailForm" class="btn btn-secondary ">Cancel</a></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+     <script src="~/js/AddEditForm.js" asp-append-version="true"></script>
+}
+
+
+
+ 

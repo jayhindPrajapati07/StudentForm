@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentForm
+namespace DataAccessLayer
 {
-    internal class StudentModel
+    public class StudentModel
     {
+        public int studentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }

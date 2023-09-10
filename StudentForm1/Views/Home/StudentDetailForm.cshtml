@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="main-container">
+    <div class="container">
+        <h1>Our Student</h1>
+        <div class="search-add ">
+            <input type="search" id="search" class="search" placeholder="Search..." />
+            <button><a asp-controller="Home" asp-action="AddEditForm">+ Add</a></button>
+        </div>
+        <div class="studentTable">
+            <table id="table" class="table">
+                <thead class="thead">
+                    <tr>
+                        <th id="fnameHeader" scope="col">First Name</th>
+                        <th id="lnameHeader" scope="col">Last Name</th>
+                        <th id="genderHeader" scope="col">Gender</th>
+                        <th id="ageHeader" scope="col">Age</th>
+                        <th id="classHeader" scope="col">Class</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+<script src="~/js/StudentDetailForm.js"></script>
+}
