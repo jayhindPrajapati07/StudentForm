@@ -212,7 +212,7 @@ $('#deleteBtn').on('click', (e) => {
     }
 });
 
-//------------Api Calls Section----------
+//------------Api Calls Section End----------
 
 
 //Set Age from dateOFBIrth

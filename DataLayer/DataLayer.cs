@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace DataAccessLayer
 {
@@ -32,14 +33,20 @@ namespace DataAccessLayer
         public void UpdateData(int id)
         {
             string[] studentData = { id.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age + years, studentModel.Class, studentModel.Address, studentModel.DateOfBirth.ToString(), studentModel.GenderIndex.ToString() };
-            studentList.RemoveAt(id);
-            studentList.Insert(id, studentData);
+            int index = studentList.FindIndex(student => student[0] == id.ToString());
+            if (index != -1)
+            {
+                studentList[index] = studentData;
+            }
         }
 
         public void DeleteData(int id)
         {
-            studentList.RemoveAt(id);
+            int index = studentList.FindIndex(student => student[0] == id.ToString());
+            if (index != -1)
+            {
+                studentList.RemoveAt(index);
+            }
         }
-
     }
 }
