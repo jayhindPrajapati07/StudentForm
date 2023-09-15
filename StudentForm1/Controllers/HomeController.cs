@@ -21,7 +21,7 @@ namespace StudentForm1.Controllers
         }
 
         [HttpGet("/home/AddEditForm")]
-        public IActionResult AddEditForm(string h1Text)
+        public IActionResult AddEditForm()
         {
             return View(); 
         }
@@ -69,7 +69,12 @@ namespace StudentForm1.Controllers
             return Ok("Data received and processed successfully");
         }
 
-
+        public JsonResult selectedStudent(string id)
+        {
+            int index = DataLayer.studentList.FindIndex(student => student[0] == id.ToString());
+            string[] Student = DataLayer.studentList[index];
+            return Json(Student);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

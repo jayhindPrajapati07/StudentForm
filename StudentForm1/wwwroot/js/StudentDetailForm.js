@@ -35,12 +35,11 @@ function createRow(studentData, data) {
     });
 
     newRow.addEventListener('dblclick', () => {
-        const rowId = newRow.getAttribute('id'); 
-        const selectedStudentData = data.find(item => item[0] === rowId); 
+        const rowId = newRow.getAttribute('id');
 
-        if (selectedStudentData) {
+        if (rowId) {
             
-            const redirectUrl = `/home/AddEditForm?h1Text=Edit Student&studentId=${selectedStudentData[0]}&firstName=${selectedStudentData[1]}&lastName=${selectedStudentData[2]}&gender=${selectedStudentData[8]}&dob=${selectedStudentData[7]}&class=${selectedStudentData[5]}&address=${selectedStudentData[6]}&age=${selectedStudentData[4]}`;
+            const redirectUrl = `/home/AddEditForm?studentId=${rowId}`;
             window.location.href = redirectUrl;
         }
     });
@@ -58,7 +57,7 @@ function displayRows(searchText) {
         if (!studentData) {
             row.style.display = 'none';
         } else {
-            const searchString = [studentData[1], studentData[2], studentData[4]].join(" ").toLowerCase();
+            const searchString = [studentData[1], studentData[2], studentData[4].toString().split(" ")[0]].join(" ").toLowerCase();
             if (searchString.includes(searchText)) {
                 row.style.display = '';
             } else {

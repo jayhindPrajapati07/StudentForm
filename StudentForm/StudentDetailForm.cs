@@ -10,7 +10,7 @@ namespace StudentForm
         {
             InitializeComponent();
         }
-
+        Layout layout = new Layout();
         private void RefreshDataGridView()
         {
             dataGridView.Rows.Clear();
@@ -23,14 +23,13 @@ namespace StudentForm
         }
 
         internal int Id;
-        internal string action;
+        internal bool EditMode;
         internal bool refreshRequired;
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddEditForm addEditForm = new AddEditForm();
             addEditForm.setMain(this);
-            action = "Add";
-            addEditForm.StudentHeaderText = "Add Students";
+            EditMode = false;
             addEditForm.ShowDialog();
             if(refreshRequired) { RefreshDataGridView(); }
         }
@@ -48,8 +47,7 @@ namespace StudentForm
                 {
                     if (DataLayer.studentList[i][0] == id) { Id = i; break; };
                 }
-                action = "Edit";
-                addEditForm.StudentHeaderText = "Edit Students";
+                EditMode = true;
                 addEditForm.LoadData();
                 addEditForm.ShowDialog();
                 if (refreshRequired) { RefreshDataGridView(); }
@@ -92,11 +90,11 @@ namespace StudentForm
         private void StudentDetailForm_Load(object sender, EventArgs e)
         {
             dataGridView.Columns.Add("StudentId", "StudentId");
-            dataGridView.Columns.Add("First Name", "First Name");
-            dataGridView.Columns.Add("Last Name", "Last Name");
-            dataGridView.Columns.Add("Gender", "Gender");
-            dataGridView.Columns.Add("Age", "Age");
-            dataGridView.Columns.Add("Class", "Class");
+            dataGridView.Columns.Add(layout.FirstNameColumnHeader, layout.FirstNameColumnHeader);
+            dataGridView.Columns.Add(layout.LastNameColumnHeader, layout.LastNameColumnHeader);
+            dataGridView.Columns.Add(layout.GenderCoumnHeader, layout.GenderCoumnHeader);
+            dataGridView.Columns.Add(layout.AgeColumnHeader,layout.AgeColumnHeader);
+            dataGridView.Columns.Add(layout.ClassColumnHeader, layout.ClassColumnHeader);
 
             int columnWidth = 223;
             dataGridView.Columns[0].Visible = false;
@@ -129,6 +127,8 @@ namespace StudentForm
             btnAdd.Font = fonts.mediumFont;
             btnAdd.BackColor = fonts.btnPrimary;
             txtSearch.Font = fonts.mediumFont;
+            lblStudentHeader.Text = layout.OurStudenHeader;
+            btnAdd.Text = layout.addBtnText;
         }
 
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)

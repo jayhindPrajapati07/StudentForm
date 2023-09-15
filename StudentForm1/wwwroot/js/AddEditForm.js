@@ -2,7 +2,7 @@
 const h1Text = urlParams.get('h1Text');
 const currentDate = new Date();
 const StudentHeader = document.querySelector('h1');
-
+let EditMode = false;
 //Selecting Inputs
 const FirstName = document.getElementById('firstName');
 const LastName = document.getElementById('lastName');
@@ -11,29 +11,6 @@ const DateOfBirth = document.getElementById('dateOfBirth');
 const Age = document.getElementById('age');
 const _Class = document.getElementById('class');
 const Address = document.getElementById('address');
-
-if (urlParams) {
-    if (StudentHeader) {
-        StudentHeader.textContent = h1Text || 'Add Student';
-    }
-    if (StudentHeader.textContent === 'Edit Student') {
-        FirstName.value = urlParams.get('firstName');
-        LastName.value = urlParams.get('lastName');
-        Gender.value = urlParams.get('gender');
-
-        const dobString = urlParams.get('dob');
-        const dobDate = new Date(dobString);
-        dobDate.setMinutes(dobDate.getMinutes() + 330);
-        const dobISOString = dobDate.toISOString().split('T')[0];
-        DateOfBirth.value = dobISOString;
-        let age = urlParams.get('age');
-        Age.value = age.substr(0,2).trim();
-        _Class.value = urlParams.get('class');
-        Address.value = urlParams.get('address');
-        $('#deleteBtn').toggleClass('hide');
-    }
-    
-}
 
 
 const StudentData = {
@@ -144,7 +121,7 @@ $(document).ready(function () {
         e.preventDefault();
         const DataApproved=setStudentData();
         if (DataApproved) {
-            if (StudentHeader.textContent === "Add Student") {
+            if (!EditMode) {
                 
                 const jsonData = JSON.stringify(StudentData);
                 $.ajax({
@@ -211,6 +188,32 @@ $('#deleteBtn').on('click', (e) => {
         e.preventDefault();
     }
 });
+
+$(document).ready(function () {
+if (urlParams) {
+    if (urlParams.get('studentId')) {
+        var id = urlParams.get('studentId'); 
+        $.get("/home/selectedStudent?id=" + id, function (data) {
+            console.log(data);
+            FirstName.value = data[1];
+            LastName.value = data[2];
+            Gender.value = data[8];
+            const dobDate = new Date(data[7]);
+            dobDate.setMinutes(dobDate.getMinutes() + 330);
+            const dobISOString = dobDate.toISOString().split('T')[0];
+            DateOfBirth.value = dobISOString;
+            Age.value = data[4].toString().split(' ')[0].trim();
+            _Class.value = data[5];
+            Address.value = data[6];
+            EditMode = true;
+            StudentHeader.textContent = "Edit Student";
+            $('#deleteBtn').toggleClass('hide');
+        });
+    }
+}
+});
+
+
 
 //------------Api Calls Section End----------
 

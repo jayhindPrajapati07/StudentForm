@@ -1,0 +1,45 @@
+﻿@using DataAccessLayer;
+@{
+    ViewData["Title"] = "Home Page";
+    string h1text = "Edit Student";
+    Layout layout = new Layout();
+}
+
+<div class="main-container">
+    <div class="container">
+        <h1>@layout.OurStudenHeader</h1>
+        <div class="search-add">
+            <input type="search" id="search" class="search" placeholder="Search..." />
+            <button><a asp-controller="Home" asp-action="AddEditForm">@layout.addBtnText</a></button>
+        </div>
+        <div class="studentTable">
+            <table id="table" class="table" data-student-data="@Json.Serialize(Model)">
+                <thead class="thead">
+                    <tr>
+                        <th id="fnameHeader" scope="col">@layout.FirstNameColumnHeader</th>
+                        <th id="lnameHeader" scope="col">@layout.LastNameColumnHeader</th>
+                        <th id="genderHeader" scope="col">@layout.GenderCoumnHeader</th>
+                        <th id="ageHeader" scope="col">@layout.AgeColumnHeader</th>
+                        <th id="classHeader" scope="col">@layout.ClassColumnHeader</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    @foreach (var student in Model)
+                    {
+                        <tr id="@student[0]" ondblclick="location.href='/home/selectedStudent?id=@student[0]'">
+                            <td>@student[1]</td>
+                            <td>@student[2]</td>
+                            <td>@student[3]</td>
+                            <td>@student[4]</td>
+                            <td>@student[5]</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<script src="~/js/StudentDetailForm.js"></script>
+}

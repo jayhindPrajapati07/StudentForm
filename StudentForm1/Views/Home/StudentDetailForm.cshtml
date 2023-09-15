@@ -1,23 +1,25 @@
-﻿@{
+﻿@using DataAccessLayer
+@{
+    Layout layout = new Layout();
     ViewData["Title"] = "Home Page";
 }
 
 <div class="main-container">
     <div class="container">
-        <h1>Our Student</h1>
+        <h1>@layout.OurStudenHeader</h1>
         <div class="search-add ">
             <input type="search" id="search" class="search" placeholder="Search..." />
-            <button><a asp-controller="Home" asp-action="AddEditForm">+ Add</a></button>
+            <button><a asp-controller="Home" asp-action="AddEditForm">@layout.addBtnText</a></button>
         </div>
         <div class="studentTable">
             <table id="table" class="table">
                 <thead class="thead">
                     <tr>
-                        <th id="fnameHeader" scope="col">First Name</th>
-                        <th id="lnameHeader" scope="col">Last Name</th>
-                        <th id="genderHeader" scope="col">Gender</th>
-                        <th id="ageHeader" scope="col">Age</th>
-                        <th id="classHeader" scope="col">Class</th>
+                        <th id="fnameHeader" scope="col">@layout.FirstNameColumnHeader</th>
+                        <th id="lnameHeader" scope="col">@layout.LastNameColumnHeader</th>
+                        <th id="genderHeader" scope="col">@layout.GenderCoumnHeader</th>
+                        <th id="ageHeader" scope="col">@layout.AgeColumnHeader</th>
+                        <th id="classHeader" scope="col">@layout.ClassColumnHeader</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">

@@ -13,17 +13,18 @@ namespace StudentForm
 
 
         StudentModel studentModel;
+        Layout layout = new Layout();
         internal void setStudentModel(StudentModel studentModel)
         {
             this.studentModel = studentModel;
         }
-
-        private string requiredMessage = "This field is required";
+        
+        
 
         internal bool ValidateFields()
         {
             bool isValid = true;
-
+            string requiredMessage = layout.requiredMessage;
             string firstName = studentModel.FirstName;
             string lastName = studentModel.LastName;
             int gender = studentModel.GenderIndex;
@@ -37,7 +38,7 @@ namespace StudentForm
             }
             else if (firstName.Length > 15 || firstName.Length < 3)
             {
-                errFirstName = "The First Name field should have min 3 characters and max 15 characters";
+                errFirstName = layout.firstNameSpError;
                 isValid = false;
             }
             else
@@ -52,7 +53,7 @@ namespace StudentForm
             }
             else if (lastName.Length > 18 || lastName.Length < 2)
             {
-                errLastName = "The last Name field should have min 2 characters and max 18 characters";
+                errLastName = layout.lastNameSpError;
                 isValid = false;
             }
             else
@@ -87,7 +88,7 @@ namespace StudentForm
             }
             else if (age > 99 || age < 5)
             {
-                errAge = "Age value should be\nbetween 5 and 99";
+                errAge = layout.ageSpError;
                 isValid = false;
             }
             else

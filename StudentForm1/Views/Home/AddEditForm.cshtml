@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@using DataAccessLayer
+@{
+    Layout layout = new Layout();
+    ViewData["Title"] = "AddEdit";
 }
 <div class="main-container1">
 
@@ -7,21 +9,21 @@
         <h1>Add Student</h1>
         <form class="form">
             <div class="inputs">
-                <label for="firstName">First Name <span>*</span></label>
+                <label for="firstName">@layout.FirstNameLabel <span>@layout.stars</span></label>
                 <div>
-                    <input type="text" maxlength="20" name="firstName" id="firstName" placeholder="Please enter First Name">
+                    <input type="text" maxlength="50" name="firstName" id="firstName" placeholder="Please enter First Name">
                     <label class="fname-err error"></label>
                 </div>
             </div>
             <div class="inputs">
-                <label for="lastName">Last Name <span>*</span></label>
+                <label for="lastName">@layout.LastNameLabel <span>@layout.stars</span></label>
                 <div class="col-sm-9">
-                    <input type="text" name="lastName" id="lastName" placeholder="Please enter Last Name">
+                    <input type="text" maxlength="50" name="lastName" id="lastName" placeholder="Please enter Last Name">
                     <label class="lname-err error"></label>
                 </div>
             </div>
             <div class="inputs">
-                <label for="gender">Gender <span>*</span></label>
+                <label for="gender">@layout.GenderLabel <span>@layout.stars</span></label>
                 <div>
                     <select class="selectGender" aria-label="Default select example" name="gender" id="gender">
                         <option value="2" selected>Select Gender</option>
@@ -33,14 +35,14 @@
             </div>
             <div class="input-group">
                 <div class="input-group-1">
-                    <label for="dateOfBirth" class="dob-label">Date of Birth <span>*</span></label>
+                    <label for="dateOfBirth" class="dob-label">@layout.DateOfBirthLabel <span>@layout.stars</span></label>
                     <div class="dob">
                         <input type="date" class="date-of-birth" name="dateOfBirth" id="dateOfBirth" min="1923-01-01" max="2023-09-06">
                         <label class="dob-err error"></label>
                     </div>
                 </div>
                 <div class="input-group-2">
-                    <label for="age">Age <span>*</span></label>
+                    <label for="age">@layout.AgeLabel <span>@layout.stars</span></label>
                     <div>
                         <div>
                             <input type="text" maxlength="2" class="age" name="age" id="age">
@@ -51,16 +53,16 @@
                 </div>
             </div>
             <div class="inputs">
-                <label for="class">Class</label>
+                <label for="class">@layout.ClassLabel</label>
                 <div class="col-sm-4 px-1 ms-2">
-                    <input type="text" name="class" id="class" placeholder="Please enter class">
+                    <input type="text" maxlength="50" name="class" id="class" placeholder="Please enter class">
 
                 </div>
             </div>
             <div class="inputs">
-                <label for="address">Address</label>
+                <label for="address">@layout.AddressLabel</label>
                 <div>
-                    <textarea name="address" id="address" class="address" rows="3" placeholder="Please enter address"></textarea>
+                    <textarea name="address" maxlength="100" id="address" class="address" rows="3" placeholder="Please enter address"></textarea>
                 </div>
             </div>
 

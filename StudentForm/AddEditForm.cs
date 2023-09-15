@@ -20,13 +20,12 @@ namespace StudentForm
         {
             InitializeComponent();
         }
-
+        Layout layout = new Layout();
         StudentDetailForm studentDetailForm;
         internal void setMain(StudentDetailForm studentDetailForm)
         {
             this.studentDetailForm = studentDetailForm;
         }
-        internal string StudentHeaderText;
         private void btnSave_Click(object sender, EventArgs e)
         {
             DataLayer dataLayer = new DataLayer();
@@ -54,8 +53,7 @@ namespace StudentForm
                 lblDateOfBirthValidator.Text = validator.errDateOfBirth;
                 lblAgeValidator.Text = validator.errAge;
             }
-            string action = studentDetailForm.action;
-            if (action == "Add")
+            if (!studentDetailForm.EditMode)
             {
                 if (Validated)
                 {
@@ -162,7 +160,7 @@ namespace StudentForm
         {
             dtDateOfBirth.MaxDate = DateTime.Now.Date;
             dtDateOfBirth.MinDate = DateTime.Parse("1/1/" + (DateTime.Now.Date.Year - 100));
-            lblStudentHeader.Text = StudentHeaderText;
+            lblStudentHeader.Text = layout.EditStudentHeader;
             btnDelete.Visible = true;
             txtAge.MaxLength = 2;
             txtFirstName.MaxLength = 47;
@@ -170,11 +168,12 @@ namespace StudentForm
             txtClass.MaxLength = 47;
             textAreaAddress.MaxLength = 300;
             studentDetailForm.refreshRequired = false;
-            if (lblStudentHeader.Text == "Add Students")
+            if (!studentDetailForm.EditMode)
             {
                 dtDateOfBirth.Text = DateTime.Now.ToShortDateString();
                 btnDelete.Visible = false;
                 setGenderPlaceHolder();
+                lblStudentHeader.Text = layout.AddStudentHeader;
             }
             setDefaultLayout();
         }
@@ -193,7 +192,21 @@ namespace StudentForm
             btnSave.BackColor = fonts.btnPrimary;
             btnCancel.BackColor = fonts.btnSecondary;
             btnDelete.ForeColor = fonts.btnDanger;
-
+            lblFirstName.Text = layout.FirstNameLabel;
+            lblLastName.Text = layout.LastNameLabel;
+            lblGender.Text = layout.GenderLabel;
+            lblDateOfBirth.Text = layout.DateOfBirthLabel;
+            lblAge.Text = layout.AgeLabel;
+            lblClass.Text = layout.ClassLabel;
+            lblAddress.Text = layout.AddressLabel;
+            btnSave.Text = layout.saveBtnText;
+            btnCancel.Text = layout.cancelBtnText;
+            btnDelete.Text= layout.deleteBtnText;
+            Star1.Text = layout.stars;
+            star2.Text = layout.stars;
+            star3.Text = layout.stars;
+            star4.Text = layout.stars;
+            star5.Text = layout.stars;
         }
         private void LoopThroughControls(Control parentControl)
         {
