@@ -1,12 +1,13 @@
-﻿@using DataAccessLayer
+﻿@using BackEnd
 @{
     Layout layout = new Layout();
     ViewData["Title"] = "AddEdit";
+    var fontsize = layout.fontSize + "px";
 }
 <div class="main-container1">
 
-    <div class="formLayout">
-        <h1>Add Student</h1>
+    <div class="formLayout" style="font-family:@layout.fontFamily;font-size:@fontsize" >
+        <h1>@layout.AddStudentHeader</h1>
         <form class="form">
             <div class="inputs">
                 <label for="firstName">@layout.FirstNameLabel <span>@layout.stars</span></label>

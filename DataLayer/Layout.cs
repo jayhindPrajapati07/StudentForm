@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer
+namespace BackEnd
 {
     public class Layout
     {
@@ -31,6 +31,9 @@ namespace DataAccessLayer
         public string cancelBtnText = "Cancel";
         public string deleteBtnText = "Delete";
         public string stars = "*";
+
+        public int fontSize = 20;
+        public string fontFamily = "Times New Roman";
 
         //errors
         public string requiredMessage = "This field is required";

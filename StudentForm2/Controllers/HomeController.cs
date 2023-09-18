@@ -1,4 +1,4 @@
-﻿using DataAccessLayer;
+﻿using BackEnd;
 using Microsoft.AspNetCore.Mvc;
 using StudentForm2.Models;
 using System.Diagnostics;
@@ -58,23 +58,22 @@ namespace StudentForm2.Controllers
                 {
                     if (!EditMode)
                     {
-                        dataLayer.AddData();
+                        dataLayer.AddData();//Add
                     }
                     else
                     {
-                        dataLayer.UpdateData(studentModel.studentId);
+                        dataLayer.UpdateData(studentModel.studentId);//Update
                     }
                 }
                 else
                 {
                     ViewData["studentId"] = studentId;
-                    
                     return View("AddEditForm",studentModel);
                 }
             }
             else if (action == "Delete")
             {
-                dataLayer.DeleteData(studentModel.studentId);
+                dataLayer.DeleteData(studentModel.studentId);//Delete
             }
             
             return View("studentdetailform", DataLayer.studentList);

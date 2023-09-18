@@ -32,8 +32,8 @@ function setStudentData() {
     StudentData.genderIndex = Gender.value;
     StudentData.dateOfBirth = DateOfBirth.value;
     StudentData.age = Age.value;
-    StudentData.class = _Class.value;
-    StudentData.address = Address.value;
+    StudentData.class = _Class.value.trim();
+    StudentData.address = Address.value.trim();
 
     function genderValue() {
         if (StudentData.genderIndex !== 2) {

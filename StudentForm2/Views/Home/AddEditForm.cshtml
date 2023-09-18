@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
-@using DataAccessLayer;
-@model DataAccessLayer.StudentModel;
+@using BackEnd;
+@model BackEnd.StudentModel;
 @{
     Layout layout = new Layout();
     string DeleteBtnhide = "hide";
@@ -15,6 +15,7 @@
     var address = "";
     var age = "";
     bool EditMode = false;
+    var fontsize = layout.fontSize + "px";
 
     if(ViewBag.Student != null)
     {
@@ -36,18 +37,15 @@
     }
     @if (ViewData["studentId"] != null)
     {
-        
             studentId = ViewData["studentId"].ToString();
             h1Text = layout.EditStudentHeader;
             DeleteBtnhide = "";
             EditMode = true;
-     
-        
     }
 }
 <div class="main-container1">
 
-    <div class="formLayout">
+    <div class="formLayout" style="font-family:@layout.fontFamily;font-size:@fontsize">
         <h1>@h1Text</h1>
         <form id="form" class="form" method="post" action="/Home/Save?studentId=@studentId&EditMode=@EditMode" onsubmit="CleanData()">
             <div class="inputs">
@@ -163,10 +161,7 @@
 
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
-
-            // Check if the element is an input field or textarea
             if (element.nodeName === "INPUT" || element.nodeName === "TEXTAREA") {
-                // Trim the value and update it
                 element.value = element.value.trim();
             }
         }

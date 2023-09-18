@@ -1,11 +1,12 @@
-﻿@using DataAccessLayer
+﻿@using BackEnd
 @{
     Layout layout = new Layout();
     ViewData["Title"] = "Home Page";
+    var fontsize = layout.fontSize + "px";
 }
 
 <div class="main-container">
-    <div class="container">
+    <div class="container" style="font-family:@layout.fontFamily;font-size:@fontsize">
         <h1>@layout.OurStudenHeader</h1>
         <div class="search-add ">
             <input type="search" id="search" class="search" placeholder="Search..." />
