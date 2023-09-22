@@ -76,7 +76,8 @@ namespace StudentForm
 
         internal void LoadData()
         {
-            int id = studentDetailForm.Id;
+            DataLayer data =new DataLayer();
+            int id = data.getStudentById(studentDetailForm.Id);
             string[] DataToEdit = DataLayer.studentList[id];
             txtFirstName.Text = DataToEdit[1];
             txtLastName.Text = DataToEdit[2];

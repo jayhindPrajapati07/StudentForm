@@ -47,7 +47,7 @@ function createRow(studentData, data) {
     return newRow;
 }
 
-// Function to display rows based on search results
+// For Searching
 function displayRows(searchText) {
     const rows = tableBody.querySelectorAll('tr');
     searchText = searchText.toLowerCase();
@@ -99,26 +99,28 @@ const fnameHeader = document.getElementById("fnameHeader");
 const lnameHeader = document.getElementById("lnameHeader");
 const genderHeader = document.getElementById("genderHeader");
 const ageHeader = document.getElementById("ageHeader");
-const classHeader = document.getElementById("classHeader"); 
+const classHeader = document.getElementById("classHeader");
+
+let ascending = true; // Flag to track sorting direction
 
 fnameHeader.addEventListener("click", () => {
     sortTable(1); // Sort based on the FirstName (index 1) column
 });
 
 lnameHeader.addEventListener("click", () => {
-    sortTable(2); 
+    sortTable(2);
 });
 
 genderHeader.addEventListener("click", () => {
-    sortTable(3); 
+    sortTable(3);
 });
 
 ageHeader.addEventListener("click", () => {
-    sortTable(4); 
+    sortTable(4);
 });
 
 classHeader.addEventListener("click", () => {
-    sortTable(5); 
+    sortTable(5);
 });
 
 function sortTable(columnIndex) {
@@ -129,16 +131,21 @@ function sortTable(columnIndex) {
         const data2 = data.find(item => item[0] === row2.getAttribute('id'));
 
         if (columnIndex === 4) {
-            const age1 = parseInt(data1[4].substr(0, 2)); 
-            const age2 = parseInt(data2[4].substr(0, 2)); 
-            return age1 - age2; // Compare as integers
+            const age1 = parseInt(data1[4].substr(0, 2));
+            const age2 = parseInt(data2[4].substr(0, 2));
+            const comparison = age1 - age2; // Compare as integers
+            return ascending ? comparison : -comparison; // Toggle sorting direction
         } else {
             // For other columns, use localeCompare to perform a string comparison
             const cell1 = data1[columnIndex];
             const cell2 = data2[columnIndex];
-            return cell1.localeCompare(cell2);
+            const comparison = cell1.localeCompare(cell2);
+            return ascending ? comparison : -comparison; // Toggle sorting direction
         }
     });
+
+    // Toggle sorting direction for the next click
+    ascending = !ascending;
 
     // Remove existing rows
     tableBody.innerHTML = '';

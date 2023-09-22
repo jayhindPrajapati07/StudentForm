@@ -41,12 +41,15 @@ namespace StudentForm
             if (Id >= 0)
             {
                 AddEditForm addEditForm = new AddEditForm();
+                DataLayer dataLayer =new DataLayer();
                 addEditForm.setMain(this);
                 id = dataGridView.Rows[Id].Cells[0].Value.ToString();
-                for (int i = 0; i < DataLayer.studentList.Count; i++)
-                {
-                    if (DataLayer.studentList[i][0] == id) { Id = i; break; };
-                }
+                Id=int.Parse(id);
+                //Id=dataLayer.getStudentById(int.Parse(id));
+                //for (int i = 0; i < DataLayer.studentList.Count; i++)
+                //{
+                //    if (DataLayer.studentList[i][0] == id) { Id = i; break; };
+                //}
                 EditMode = true;
                 addEditForm.LoadData();
                 addEditForm.ShowDialog();

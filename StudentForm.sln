@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForm1", "StudentForm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForm2", "StudentForm2\StudentForm2.csproj", "{5F79C80E-033D-476F-99A0-6F02566C071B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForm3", "StudentForm3\StudentForm3.csproj", "{EEE1A5E0-6CFC-4721-A76F-4CEF254A65E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5F79C80E-033D-476F-99A0-6F02566C071B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F79C80E-033D-476F-99A0-6F02566C071B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F79C80E-033D-476F-99A0-6F02566C071B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEE1A5E0-6CFC-4721-A76F-4CEF254A65E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE1A5E0-6CFC-4721-A76F-4CEF254A65E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE1A5E0-6CFC-4721-A76F-4CEF254A65E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE1A5E0-6CFC-4721-A76F-4CEF254A65E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

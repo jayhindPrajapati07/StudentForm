@@ -33,7 +33,8 @@ namespace BackEnd
         public void UpdateData(int id)
         {
             string[] studentData = { id.ToString(), studentModel.FirstName, studentModel.LastName, studentModel.Gender, studentModel.Age + years, studentModel.Class, studentModel.Address, studentModel.DateOfBirth.ToString(), studentModel.GenderIndex.ToString() };
-            int index = studentList.FindIndex(student => student[0] == id.ToString());
+            //int index = studentList.FindIndex(student => student[0] == id.ToString());
+            int index = getStudentById(id);
             if (index != -1)
             {
                 studentList[index] = studentData;
@@ -42,11 +43,18 @@ namespace BackEnd
 
         public void DeleteData(int id)
         {
-            int index = studentList.FindIndex(student => student[0] == id.ToString());
+            //int index = studentList.FindIndex(student => student[0] == id.ToString());
+            int index = getStudentById(id);
             if (index != -1)
             {
                 studentList.RemoveAt(index);
             }
+        }
+
+        public int getStudentById(int id)
+        {
+            int index = studentList.FindIndex(student => student[0] == id.ToString());
+            return index;
         }
     }
 }

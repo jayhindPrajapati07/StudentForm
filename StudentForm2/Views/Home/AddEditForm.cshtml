@@ -150,7 +150,7 @@
     document.getElementById('gender').value = @(@Model?.GenderIndex.ToString() ?? gender);
     
      $('#deleteBtn').on('click', (e) => {
-            if (!confirm("Are you sure you want to delete this item?")) {
+            if (!confirm("Are you sure you want to delete this student record?")) {
                 event.preventDefault();
             }
      })

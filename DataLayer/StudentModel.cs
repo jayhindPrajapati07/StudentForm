@@ -22,11 +22,11 @@ namespace BackEnd
 
 
         //for errors
-        public string errFirstName { get; set; }
-        public string errLastName { get; set; }
-        public string errGender { get; set; }
-        public string errDateOfBirth { get; set; }
-        public string errAge { get; set; }
+        public string errFirstName { get; set; } = "";
+        public string errLastName { get; set; } = "";
+        public string errGender { get; set; } = "";
+        public string errDateOfBirth { get; set; } = "";
+        public string errAge { get; set; } = "";
     }
 
 

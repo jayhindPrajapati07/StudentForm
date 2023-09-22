@@ -7,6 +7,7 @@
 $(document).ready(function () {
     const $table = $('#table');
     const $tableBody = $('#tableBody');
+    let ascending = true; // Flag to track sorting direction
 
     // Bind click event to all th elements
     $table.find('th').on('click', function () {
@@ -22,11 +23,16 @@ $(document).ready(function () {
             if (columnIndex === 4) {
                 const age1 = parseInt(cell1.substr(0, 2));
                 const age2 = parseInt(cell2.substr(0, 2));
-                return age1 - age2; // Compare as integers
+                const comparison = age1 - age2; // Compare as integers
+                return ascending ? comparison : -comparison; // Toggle sorting direction
             } else {
-                return cell1.localeCompare(cell2);
+                const comparison = cell1.localeCompare(cell2);
+                return ascending ? comparison : -comparison; // Toggle sorting direction
             }
         });
+
+        // Toggle sorting direction for the next click
+        ascending = !ascending;
 
         // Remove existing rows
         $tableBody.empty();
@@ -36,6 +42,7 @@ $(document).ready(function () {
             $tableBody.append($(this));
         });
     });
+
     $tableBody.on('click', 'tr', function () {
         $tableBody.find('tr').removeClass('selectedRow');
         $(this).toggleClass('selectedRow');
@@ -45,6 +52,8 @@ $(document).ready(function () {
     $tableBody.find('tr').eq(0).addClass('selectedRow');
 });
 
+
+//For Searching
 $(document).ready(function () {
     const $searchBox = $('#search');
     const $table = $('#table');

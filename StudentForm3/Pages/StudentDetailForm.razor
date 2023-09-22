@@ -1,0 +1,149 @@
+﻿@page "/"
+@{
+    Layout layout = new Layout();
+    var fontsize = layout.fontSize + "px";
+}
+
+<div class="main-container">
+    <div class="container" style="font-family:@(layout.fontFamily);font-size:@fontsize">
+        <h1>@(layout.OurStudenHeader)</h1>
+        <div class="search-add">
+            <input type="search"  @oninput="FilterStudentList" id="search" class="search" placeholder="Search..." />
+            <button><NavLink href="/AddEdit">@(layout.addBtnText)</NavLink></button>
+        </div>
+        <div class="studentTable">
+            <table id="table" class="table">
+                <thead class="thead">
+                    <tr>
+                        <th id="fnameHeader" scope="col" @onclick="() => SortByColumn(1)">@(layout.FirstNameColumnHeader)</th>
+                        <th id="lnameHeader" scope="col" @onclick="() => SortByColumn(2)">@(layout.LastNameColumnHeader)</th>
+                        <th id="genderHeader" scope="col" @onclick="() => SortByColumn(3)">@(layout.GenderCoumnHeader)</th>
+                        <th id="ageHeader" scope="col" @onclick="() => SortByColumn(4)">@(layout.AgeColumnHeader)</th>
+                        <th id="classHeader" scope="col" @onclick="() => SortByColumn(5)">@(layout.ClassColumnHeader)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    @foreach (var student in FilteredStudent)
+                    {
+                        <tr id="@student[0]" class="@GetRowClass(student[0])" @onclick="() => SelectRow(student[0])" @ondblclick="()=>navigateToEdit(student[0])">
+                            <td>@student[1]</td>
+                            <td>@student[2]</td>
+                            <td>@student[3]</td>
+                            <td>@student[4]</td>
+                            <td>@student[5]</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@code{
+    public List<string[]> StudentList { get; set; }
+    public List<string[]> FilteredStudent { get; set; }
+    public string SelectedRowId { get; set; } = "0";
+    public int SortColumn { get; set; } = -1;
+    public bool SortAscending { get; set; } = true;
+    protected override void OnInitialized()
+    {
+        addDefaultStudent();
+        StudentList = DataLayer.studentList;
+        FilteredStudent = StudentList;
+    }
+
+    private void navigateToEdit(string id)
+    {
+        navigationManager.NavigateTo("/AddEdit/true/"+id);
+    }
+    //Default Students
+    private static bool defaultStudentAdded = false;
+    DataLayer dataLayer = new DataLayer();
+    void addDefaultStudent()
+    {
+        if (!defaultStudentAdded)
+        {
+            dataLayer.defaultStudents();
+            defaultStudentAdded = true;
+        }
+    }
+    
+    //For Searching
+    private void FilterStudentList(ChangeEventArgs e)
+    {
+        var searchTextLower = e.Value.ToString().ToLower();
+        FilteredStudent = StudentList.Where(student =>
+                student[1].ToLower().Contains(searchTextLower) ||
+                student[2].ToLower().Contains(searchTextLower) ||
+                student[4].ToLower().Split(" ")[0].Contains(searchTextLower)
+        ).ToList();
+        
+    }
+
+    //For Sorting
+    private void SortByColumn(int column)
+    {
+        if (SortColumn == column)
+        {
+            SortAscending = !SortAscending; // Toggle sorting direction if clicking on the same column
+        }
+        else
+        {
+            SortColumn = column;
+            SortAscending = true;
+        }
+
+        // Perform sorting based on the selected column and direction
+        switch (SortColumn)
+        {
+            case 1:
+                FilteredStudent = SortAscending
+                    ? StudentList.OrderBy(student => student[1]).ToList()
+                    : StudentList.OrderByDescending(student => student[1]).ToList();
+                break;
+            case 2:
+                FilteredStudent = SortAscending
+                    ? StudentList.OrderBy(student => student[2]).ToList()
+                    : StudentList.OrderByDescending(student => student[2]).ToList();
+                break;
+            case 3:
+                FilteredStudent = SortAscending
+                    ? StudentList.OrderBy(student => student[3]).ToList()
+                    : StudentList.OrderByDescending(student => student[3]).ToList();
+                break;
+            case 4:
+                FilteredStudent = SortAscending
+                    ? StudentList.OrderBy(student =>
+                        int.Parse(student[4].Split(" ")[0])).ToList()
+                    : StudentList.OrderByDescending(student =>
+                        int.Parse(student[4].Split(" ")[0])).ToList();
+                break;
+            case 5:
+                FilteredStudent = SortAscending
+                    ? StudentList.OrderBy(student => student[5]).ToList()
+                    : StudentList.OrderByDescending(student => student[5]).ToList();
+                break;
+            default:
+                // No sorting, restore the original order
+                FilteredStudent = DataLayer.studentList.ToList();
+                break;
+        }
+    }
+
+    //Select Rows
+    private void SelectRow(string id)
+    {
+        if (SelectedRowId == id)
+        {
+            SelectedRowId = null;
+        }
+        else
+        {
+            SelectedRowId = id; 
+        }
+    }
+
+    private string GetRowClass(string id)
+    {
+        return SelectedRowId == id ? "selectedRow" : ""; 
+    }
+}
