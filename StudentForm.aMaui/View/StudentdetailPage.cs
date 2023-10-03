@@ -90,6 +90,7 @@ public class StudentDetailPage : ContentPage
                     {
                         View = new StackLayout
                         {
+                            //BackgroundColor=Color.FromArgb("#2275c2"),
                             Orientation = StackOrientation.Horizontal,
                             Spacing = 2,
                             Children =
@@ -109,9 +110,10 @@ public class StudentDetailPage : ContentPage
         };
         Border TableLayout = new Border
         {
-            StrokeThickness = 3,
+            StrokeThickness = 2,
             Padding = new Thickness(10, 5),
             Margin=new Thickness(0, 20),
+            BackgroundColor=Color.FromArgb("#f0f8ff"),
             HorizontalOptions = LayoutOptions.Center,
             StrokeShape = new RoundRectangle
             {
@@ -120,12 +122,19 @@ public class StudentDetailPage : ContentPage
             Content = tableView
         };
 
+        //----------------------------Trial and Error-------------------------------//
+       
+        //----------------------------Trial and Error-------------------------------//
+
 
         // StackLayout to organize the elements vertically
-        var mainLayout = new StackLayout
+        var mainLayout = new ScrollView
         {
-            Padding = new Thickness(15),
-            Children = { headerLabel, searchLayout, TableLayout }
+            Content = new StackLayout
+            {
+                Padding = new Thickness(15),
+                Children = { headerLabel, searchLayout, TableLayout }
+            }
         };
 
         Content = mainLayout;
@@ -285,8 +294,7 @@ public class StudentDetailPage : ContentPage
             tableSection.Add(viewCell);
         }
     }
-
-    
+ 
 }
 
 

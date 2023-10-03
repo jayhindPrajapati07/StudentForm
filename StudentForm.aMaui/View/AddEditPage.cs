@@ -73,21 +73,21 @@ public class AddEditPage : ContentPage
         StudentHeader = new Label
         {
             Text = layout.AddStudentHeader,
-            FontSize = layout.fontSize*1.6,
+            FontSize = layout.fontSize * 1.6,
             HorizontalOptions = LayoutOptions.Center
         };
         //First Name
         var firstNameLabel = new Label
         {
-            FormattedText =new FormattedString
+            FormattedText = new FormattedString
             {
-                Spans={
+                Spans ={
                     new Span{Text=layout.FirstNameLabel,},
                     new Span{Text=layout.stars,TextColor=Color.FromArgb("f00")}
                 }
             },
             Margin = new Thickness(20, 4, 0, 4),
-            FontSize = layout.fontSize*.9
+            FontSize = layout.fontSize * .9
         };
 
         var firstNameEntryFrame = new Frame
@@ -98,9 +98,9 @@ public class AddEditPage : ContentPage
         firstNameEntry = new Entry
         {
             HeightRequest = 50,
-            FontSize = layout.fontSize*.9,
+            FontSize = layout.fontSize * .9,
             Placeholder = "Please enter First Name",
-            MaxLength=50,
+            MaxLength = 50,
         };
         firstNameEntry.TextChanged += FirstNameEntry_TextChanged;
         firstNameEntryFrame.Content = firstNameEntry;
@@ -128,7 +128,7 @@ public class AddEditPage : ContentPage
             HeightRequest = 50,
             FontSize = layout.fontSize * .9,
             Placeholder = "Please enter Last Name",
-            MaxLength=50,
+            MaxLength = 50,
         };
         lastNameEntry.TextChanged += LastNameEntry_TextChanged;
         lastNameEntryFrame.Content = lastNameEntry;
@@ -157,7 +157,7 @@ public class AddEditPage : ContentPage
             FontSize = layout.fontSize * .9,
             Title = "Select Gender"
         };
-        
+
         genderPicker.ItemsSource = new string[] { "Male", "Female" };
         genderPickerFrame.Content = genderPicker;
         //DateOfBirth
@@ -183,11 +183,11 @@ public class AddEditPage : ContentPage
         {
             FontSize = layout.fontSize * .9,
             HeightRequest = 50,
-            MaximumDate=DateTime.Today,
-            MinimumDate=DateTime.Now.AddYears(-100),
+            MaximumDate = DateTime.Today,
+            MinimumDate = DateTime.Now.AddYears(-100),
             VerticalOptions = LayoutOptions.Center,
             AutomationId = "DateOfBirthPicker"
-            
+
         };
         dateOfBirthDatePicker.DateSelected += DateOfBirthDatePicker_DateSelected;
 
@@ -238,7 +238,7 @@ public class AddEditPage : ContentPage
             HeightRequest = 50,
             FontSize = layout.fontSize * .9,
             Placeholder = "Please enter Class",
-            MaxLength=50,
+            MaxLength = 50,
         };
 
         classEntryFrame.Content = classEntry;
@@ -285,8 +285,8 @@ public class AddEditPage : ContentPage
             Text = layout.deleteBtnText,
             HeightRequest = 45,
             WidthRequest = 70,
-            BackgroundColor=Color.FromArgb("#f3dede"),
-            TextColor=Color.FromArgb("#f00")
+            BackgroundColor = Color.FromArgb("#f3dede"),
+            TextColor = Color.FromArgb("#f00")
         };
         deleteButton.Clicked += DeleteButton_Clicked;
 
@@ -303,8 +303,8 @@ public class AddEditPage : ContentPage
             Text = layout.cancelBtnText,
             HeightRequest = 45,
             WidthRequest = 72,
-            TextColor=Color.FromArgb("#000"),
-            BackgroundColor=Color.FromArgb("#9a9a99")
+            TextColor = Color.FromArgb("#000"),
+            BackgroundColor = Color.FromArgb("#9a9a99")
         };
         cancelButton.Clicked += CancelButton_Clicked;
 
@@ -316,7 +316,7 @@ public class AddEditPage : ContentPage
         buttonGrid.Children.Add(saveButton);
         buttonGrid.Children.Add(cancelButton);
 
-        
+
         //dobAndAge
         Grid.SetRow(dateOfBirthLabel, 0);
         Grid.SetColumn(dateOfBirthLabel, 0);
@@ -333,31 +333,31 @@ public class AddEditPage : ContentPage
         //Error Labels
         lblfnameError = new Label
         {
-            Margin = new Thickness(20, 0, 0, 0),Text = "",FontSize = layout.fontSize*.7,TextColor = Color.FromRgba("#f00")
+            Margin = new Thickness(20, 3, 0, 0), Text = "", FontSize = layout.fontSize * .7, TextColor = Color.FromRgba("#f00")
         };
         lbllnameError = new Label
         {
-            Margin = new Thickness(20, 0, 0, 0),Text = "",FontSize = layout.fontSize * .7,TextColor = Color.FromRgba("#f00")
+            Margin = new Thickness(20, 3, 0, 0), Text = "", FontSize = layout.fontSize * .7, TextColor = Color.FromRgba("#f00")
         };
         lblgenderError = new Label
         {
-            Margin = new Thickness(20, 0, 0, 0),Text = "",FontSize = layout.fontSize * .7,TextColor = Color.FromRgba("#f00")
+            Margin = new Thickness(20, 3, 0, 0), Text = "", FontSize = layout.fontSize * .7, TextColor = Color.FromRgba("#f00")
         };
 
-        lblDateOfBirthError= new Label
+        lblDateOfBirthError = new Label
         {
-            Margin = new Thickness(20, 0, 0, 0),Text = "",FontSize = layout.fontSize * .7,TextColor = Color.FromRgba("#f00")
+            Margin = new Thickness(20, 3, 0, 0), Text = "", FontSize = layout.fontSize * .7, TextColor = Color.FromRgba("#f00")
         };
-        lblageError= new Label
+        lblageError = new Label
         {
-            Margin = new Thickness(20, 0, 0, 0),Text = "",FontSize = layout.fontSize * .7,TextColor = Color.FromRgba("#f00")
+            Margin = new Thickness(20, 3, 0, 0), Text = "", FontSize = layout.fontSize * .7, TextColor = Color.FromRgba("#f00")
         };
 
         //DobAndAge Grid
         var dobAgeGrid = new Grid
         {
-            ColumnSpacing=10,
-            RowSpacing=3,
+            ColumnSpacing = 10,
+            RowSpacing = 3,
             RowDefinitions = new RowDefinitionCollection
             {
                 new RowDefinition { Height = 40 },
@@ -392,30 +392,34 @@ public class AddEditPage : ContentPage
         dobAgeGrid.Children.Add(ageLabel);
         dobAgeGrid.Children.Add(ageEntryFrame);
         dobAgeGrid.Children.Add(lblageError);
-        
-        //Main Layout
-        Content = new StackLayout
-        {
-            Margin = new Thickness(15),
 
-            Children =
+        //Main Layout
+        Content = new ScrollView
+        {
+            Content = new StackLayout
             {
-                StudentHeader,
-                firstNameLabel,
-                firstNameEntryFrame,
-                lblfnameError,
-                lastNameLabel,
-                lastNameEntryFrame,
-                lbllnameError,
-                genderLabel,
-                genderPickerFrame,
-                lblgenderError,
-                dobAgeGrid,
-                classLabel,
-                classEntryFrame,
-                addressLabel,
-                addressEntryFrame,
-                buttonGrid
+                Margin = new Thickness(15),
+
+                Children =
+                {
+                    StudentHeader,
+                    firstNameLabel,
+                    firstNameEntryFrame,
+                    lblfnameError,
+                    lastNameLabel,
+                    lastNameEntryFrame,
+                    lbllnameError,
+                    genderLabel,
+                    genderPickerFrame,
+                    lblgenderError,
+                    dobAgeGrid,
+                    classLabel,
+                    classEntryFrame,
+                    addressLabel,
+                    addressEntryFrame,
+                    buttonGrid,
+                }
+
             }
         };
 
