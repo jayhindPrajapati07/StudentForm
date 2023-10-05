@@ -18,7 +18,6 @@ public class AddEditPage : ContentPage
     private Entry ageEntry;
     private Entry classEntry;
     private Editor addressEntry;
-    private Label StudentHeader;
     private Button deleteButton;
 
     private Label lblfnameError;
@@ -32,6 +31,13 @@ public class AddEditPage : ContentPage
     public AddEditPage()
 	{
         InitializeComponent();
+        var saveButton = new ToolbarItem
+        {
+            Text = "Save",
+
+        };
+        ToolbarItems.Add(saveButton);
+        saveButton.Clicked += SaveButton_Clicked;
     }
     protected override void OnAppearing()
     {
@@ -40,12 +46,12 @@ public class AddEditPage : ContentPage
         if (IsEditMode == "true")
         {
             getSelectedStudentData(int.Parse(StudentId));
-            StudentHeader.Text = layout.EditStudentHeader;
+            Title = layout.EditStudentHeader;
         }
         else
         {
             deleteButton.IsVisible= false;
-            StudentHeader.Text = layout.AddStudentHeader;
+            Title = layout.AddStudentHeader;
         }
         
     }
@@ -70,12 +76,8 @@ public class AddEditPage : ContentPage
     }
     private void InitializeComponent()
     {
-        StudentHeader = new Label
-        {
-            Text = layout.AddStudentHeader,
-            FontSize = layout.fontSize * 1.6,
-            HorizontalOptions = LayoutOptions.Center
-        };
+        Title = layout.AddStudentHeader;
+        
         //First Name
         var firstNameLabel = new Label
         {
@@ -264,71 +266,33 @@ public class AddEditPage : ContentPage
 
         addressEntryFrame.Content = addressEntry;
         //Buttons
-        var buttonGrid = new Grid
-        {
-            RowDefinitions = new RowDefinitionCollection
-            {
-                new RowDefinition { Height = 50 }
-            },
-            ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new ColumnDefinition { Width = GridLength.Star },
-                new ColumnDefinition { Width = GridLength.Star },
-                new ColumnDefinition { Width = GridLength.Star },
-                new ColumnDefinition { Width = GridLength.Star }
-            },
-            Margin = new Thickness(0, 15)
-        };
+        
 
         deleteButton = new Button
         {
+            Margin = new Thickness(0, 15),
             Text = layout.deleteBtnText,
             HeightRequest = 45,
             WidthRequest = 70,
             BackgroundColor = Color.FromArgb("#f3dede"),
-            TextColor = Color.FromArgb("#f00")
+            TextColor = Color.FromArgb("#f00"),
+            HorizontalOptions = LayoutOptions.Start,
         };
         deleteButton.Clicked += DeleteButton_Clicked;
 
-        var saveButton = new Button
-        {
-            Text = layout.saveBtnText,
-            HeightRequest = 45,
-            WidthRequest = 70
-        };
-        saveButton.Clicked += SaveButton_Clicked;
+        
+        ////dobAndAge
+        //Grid.SetRow(dateOfBirthLabel, 0);
+        //Grid.SetColumn(dateOfBirthLabel, 0);
 
-        var cancelButton = new Button
-        {
-            Text = layout.cancelBtnText,
-            HeightRequest = 45,
-            WidthRequest = 72,
-            TextColor = Color.FromArgb("#000"),
-            BackgroundColor = Color.FromArgb("#9a9a99")
-        };
-        cancelButton.Clicked += CancelButton_Clicked;
+        //Grid.SetRow(dateOfBirthFrame, 1);
+        //Grid.SetColumn(dateOfBirthFrame, 0);
 
-        Grid.SetColumn(deleteButton, 0);
-        Grid.SetColumn(saveButton, 2);
-        Grid.SetColumn(cancelButton, 3);
+        //Grid.SetRow(ageLabel, 0);
+        //Grid.SetColumn(ageLabel, 1);
 
-        buttonGrid.Children.Add(deleteButton);
-        buttonGrid.Children.Add(saveButton);
-        buttonGrid.Children.Add(cancelButton);
-
-
-        //dobAndAge
-        Grid.SetRow(dateOfBirthLabel, 0);
-        Grid.SetColumn(dateOfBirthLabel, 0);
-
-        Grid.SetRow(dateOfBirthFrame, 1);
-        Grid.SetColumn(dateOfBirthFrame, 0);
-
-        Grid.SetRow(ageLabel, 0);
-        Grid.SetColumn(ageLabel, 1);
-
-        Grid.SetRow(ageEntryFrame, 1);
-        Grid.SetColumn(ageEntryFrame, 1);
+        //Grid.SetRow(ageEntryFrame, 1);
+        //Grid.SetColumn(ageEntryFrame, 1);
 
         //Error Labels
         lblfnameError = new Label
@@ -402,22 +366,14 @@ public class AddEditPage : ContentPage
 
                 Children =
                 {
-                    StudentHeader,
-                    firstNameLabel,
-                    firstNameEntryFrame,
-                    lblfnameError,
-                    lastNameLabel,
-                    lastNameEntryFrame,
-                    lbllnameError,
+                    firstNameLabel,firstNameEntryFrame,lblfnameError,
+                    lastNameLabel,lastNameEntryFrame,lbllnameError,
                     genderLabel,
-                    genderPickerFrame,
-                    lblgenderError,
+                    genderPickerFrame,lblgenderError,
                     dobAgeGrid,
-                    classLabel,
-                    classEntryFrame,
-                    addressLabel,
-                    addressEntryFrame,
-                    buttonGrid,
+                    classLabel,classEntryFrame,
+                    addressLabel,addressEntryFrame,
+                    deleteButton,
                 }
 
             }
@@ -558,12 +514,6 @@ public class AddEditPage : ContentPage
         
     }
 
-    //Cancel
-    private void CancelButton_Clicked(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync("..");
-    }
-
     //Calculate age from DateOfBirth
 
     private void DateOfBirthDatePicker_DateSelected(object sender, DateChangedEventArgs e)
@@ -597,7 +547,6 @@ public class AddEditPage : ContentPage
         preventNumerics(e.NewTextValue, out string textonly);
         lastNameEntry.Text = textonly;
     }
-    
     private void FirstNameEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
         preventNumerics(e.NewTextValue,out string textonly);

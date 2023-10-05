@@ -20,6 +20,14 @@ public class StudentDetailPage : ContentPage
 	{
         StudentList = new ObservableCollection<string[]>();
         addDefaultStudent();
+        var addButton = new ToolbarItem
+        {
+            Text = "+Add",
+
+        };
+        addButton.Clicked += AddButton_Clicked;
+
+        ToolbarItems.Add(addButton);
     }
     protected override void OnAppearing()
     {
@@ -38,94 +46,19 @@ public class StudentDetailPage : ContentPage
 
     private void InitializeComponent()
     {
-        // Header Label
-        var headerLabel = new Label
-        {
-            Text = layout.OurStudenHeader,
-            FontSize = layout.fontSize*1.5,
-            Margin = new Thickness(0,0,0,10),
-            HorizontalOptions = LayoutOptions.Center
-        };
 
-        // Search Box and Button (same as before)
-        searchBar = new SearchBar
+        Title = layout.OurStudenHeader;
+
+        var searchBar = new SearchBar
         {
             Placeholder = "Search...",
-            WidthRequest = 200,
+            WidthRequest = 350,
         };
+
         searchBar.TextChanged += SearchBar_TextChanged;
-        var addButton = new Button
-        {
-            Text = layout.addBtnText,
-            WidthRequest = 72,
-            Margin = new Thickness(20, 0, 0, 0)
-
-        };
-        addButton.Clicked += AddButton_Clicked;
-
-        var searchLayout = new StackLayout
-        {
-            WidthRequest = 330,
-            Orientation = StackOrientation.Horizontal,
-
-            Children = { searchBar, addButton }
-        };
-
 
 
         collectionView = new CollectionView();
-
-        // Create a grid for the header row
-        var headerGrid = new Grid();
-        headerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-        headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-
-        // Add labels for headers
-        var firstNameHeaderLabel = CreateColumnHeaderLabel(layout.FirstNameColumnHeader, "FirstName");
-
-        Grid.SetColumn(firstNameHeaderLabel, 0);
-
-        var lastNameHeaderLabel = CreateColumnHeaderLabel(layout.LastNameColumnHeader, "LastName");
-        Grid.SetColumn(lastNameHeaderLabel, 1);
-
-        var genderHeaderLabel = CreateColumnHeaderLabel(layout.GenderCoumnHeader, "Gender");
-        Grid.SetColumn(genderHeaderLabel, 2);
-
-        var ageHeaderLabel = CreateColumnHeaderLabel(layout.AgeColumnHeader, "Age");
-        Grid.SetColumn(ageHeaderLabel, 3);
-
-        var classHeaderLabel = CreateColumnHeaderLabel(layout.ClassColumnHeader, "Class");
-        Grid.SetColumn(classHeaderLabel, 4);
-
-        headerGrid.Children.Add(firstNameHeaderLabel);
-        headerGrid.Children.Add(lastNameHeaderLabel);
-        headerGrid.Children.Add(genderHeaderLabel);
-        headerGrid.Children.Add(ageHeaderLabel);
-        headerGrid.Children.Add(classHeaderLabel);
-
-        // Add the header grid to the CollectionView
-        collectionView.Header = headerGrid;
-
-        //collectionView.SelectionMode = SelectionMode.Single;
-        //collectionView.SelectedItem =true;
-
-        Border TableLayout = new Border
-        {
-            StrokeThickness = 2,
-            Padding = new Thickness(10, 5),
-            Margin = new Thickness(0, 20),
-            BackgroundColor = Color.FromArgb("#f0f8ff"),
-            HorizontalOptions = LayoutOptions.Center,
-            StrokeShape = new RoundRectangle
-            {
-                CornerRadius = new CornerRadius(10)
-            },
-            Content = collectionView
-        };
 
 
         // StackLayout to organize the elements vertically
@@ -134,7 +67,7 @@ public class StudentDetailPage : ContentPage
             Content = new StackLayout
             {
                 Padding = new Thickness(15),
-                Children = { headerLabel, searchLayout, TableLayout }
+                Children = { searchBar,  collectionView }
             }
         };
 
@@ -270,43 +203,62 @@ public class StudentDetailPage : ContentPage
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
+            grid.ColumnSpacing = 5;
+            grid.RowSpacing = 10;
+            
             // Bind data to labels and set row/column positions
             var idLabel = new Label();
             idLabel.SetBinding(Label.TextProperty, new Binding("[0]"));
             idLabel.IsVisible = false;
 
-            var firstNameLabel = new Label();
-            firstNameLabel.SetBinding(Label.TextProperty, new Binding("[1]"));
-            Grid.SetColumn(firstNameLabel, 0);
-            Grid.SetRow(firstNameLabel, 1);
+            var firstNameLabel = new Label
+            {
+                FormattedText = new FormattedString
+                {
+                Spans =
+                {
+                    new Span { Text = "" },
+                     new Span { Text = " " },
+                    new Span { Text = "", } 
+                },
 
-            var lastNameLabel = new Label();
-            lastNameLabel.SetBinding(Label.TextProperty, new Binding("[2]"));
-            Grid.SetColumn(lastNameLabel, 1);
-            Grid.SetRow(lastNameLabel, 1);
+                },
+                Margin = new Thickness(0, 4, 0, 4),
+                FontSize = layout.fontSize * 0.9
+            };
+            Grid.SetColumn(firstNameLabel, 0);
+            Grid.SetRow(firstNameLabel, 0);
+            Grid.SetColumnSpan(firstNameLabel, 2);
+
+            // Set bindings to the Text property of the Spans
+            var firstNameBinding = new Binding("[1]");
+            firstNameLabel.FormattedText.Spans[0].SetBinding(Span.TextProperty, firstNameBinding);
+
+            var starsBinding = new Binding("[2]");
+            firstNameLabel.FormattedText.Spans[2].SetBinding(Span.TextProperty, starsBinding);
+
+
 
             var genderLabel = new Label();
             genderLabel.SetBinding(Label.TextProperty, new Binding("[3]"));
-            Grid.SetColumn(genderLabel, 2);
+            Grid.SetColumn(genderLabel, 0);
             Grid.SetRow(genderLabel, 1);
 
             var ageLabel = new Label();
             ageLabel.SetBinding(Label.TextProperty, new Binding("[4]"));
             Grid.SetColumn(ageLabel, 3);
-            Grid.SetRow(ageLabel, 1);
+            Grid.SetRow(ageLabel, 0);
 
             var classLabel = new Label();
             classLabel.SetBinding(Label.TextProperty, new Binding("[5]"));
-            Grid.SetColumn(classLabel, 4);
+            Grid.SetColumn(classLabel, 3);
             Grid.SetRow(classLabel, 1);
 
-
+            
             // Add data labels to grid
             grid.Children.Add(idLabel);
             grid.Children.Add(firstNameLabel);
-            grid.Children.Add(lastNameLabel);
             grid.Children.Add(genderLabel);
             grid.Children.Add(ageLabel);
             grid.Children.Add(classLabel);
@@ -314,17 +266,27 @@ public class StudentDetailPage : ContentPage
             var tapGesture = new TapGestureRecognizer();
             tapGesture.Tapped += (sender, e) =>
             {
-                TimeSpan timeSinceLastTap = DateTime.Now - lastTapTime;
-                if (timeSinceLastTap.TotalMilliseconds < 300) // Adjust the time threshold as needed
-                {
                     HandleDoubleTap(idLabel.Text);
-                }
-                lastTapTime = DateTime.Now;
-                
             };
             grid.GestureRecognizers.Add(tapGesture);
 
-            return new ContentView { Content = grid,Margin=new Thickness(4,10) };
+            Border CollectionBorder = new Border
+            {
+                StrokeThickness = 2,
+                Padding = new Thickness(7),
+                Margin = new Thickness(7,2),
+                WidthRequest = 350,
+                HeightRequest = 80,
+                BackgroundColor = Color.FromArgb("#f0f8ff"),
+                HorizontalOptions = LayoutOptions.Center,
+                StrokeShape = new RoundRectangle
+                {
+                    CornerRadius = new CornerRadius(10)
+                },
+                Content = grid
+            };
+
+            return new ContentView { Content = CollectionBorder,HorizontalOptions = LayoutOptions.Center,VerticalOptions=LayoutOptions.Center, Margin=new Thickness(4,2) };
         });
     }
  
